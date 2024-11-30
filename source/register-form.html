@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Join us for three days of basketry workshops, sharing, and community." />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="register.js"></script>
+  </head>
+  <body>
+    <section>
+      <h1>Register</h1>
+
+      <form>
+        <h2>Basics</h2>
+
+        <label>
+          <span>Full Name</span>
+          <input type="text" name="fullName" />
+        </label>
+
+        <label>
+          <span>What would you like us to call you?</span>
+          <input type="text" name="nickname" />
+        </label>
+
+        <label>
+          <span>Preferred Pronouns</span>
+          <input type="text" name="pronouns" />
+        </label>
+
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" />
+        </label>
+
+        <label>
+          <span>Phone</span>
+          <input type="tel" name="phone" />
+        </label>
+
+        <div>
+          <span>Are you a first aider?</span>
+          <div class="row">
+            <label><input type="radio" name="firstAider" value="yes" /> <span>Yes</span></label>
+            <label><input type="radio" name="firstAider" value="no" /> <span>No</span></label>
+          </div>
+        </div>
+
+        <label>
+          <span>Emergency Contact</span>
+          <input type="text" name="emergencyContact" />
+        </label>
+
+        <h2>Meals</h2>
+
+        <div>
+          <span>Which days are you having a meal?</span>
+          <div class="row">
+            <label><input type="checkbox" name="meals" value="fridayLunch" /> <span>Friday Lunch</span></label>
+            <label><input type="checkbox" name="meals" value="fridaySupper" /> <span>Friday Supper</span></label>
+            <label><input type="checkbox" name="meals" value="saturdayLunch" /> <span>Saturday Lunch</span></label>
+            <label><input type="checkbox" name="meals" value="saturdaySupper" /> <span>Saturday Supper</span></label>
+            <label><input type="checkbox" name="meals" value="sundayLunch" /> <span>Sunday Lunch</span></label>
+            <label><input type="checkbox" name="meals" value="sundaySupper" /> <span>Sunday Supper</span></label>
+          </div>
+        </div>
+
+        <label>
+          <span>Do you have any food allergies?</span>
+          <input type="text" name="allergies" />
+        </label>
+
+        <h2>Workshops</h2>
+
+        <div>
+          <span>Workshop Choices</span>
+          <h3>This is gonna be a whole thing</h3>
+        </div>
+
+        <h2>Accommodations</h2>
+
+        <div>
+          <span>Accommodation</span>
+          <div class="row">
+            <label>
+              <input type="radio" name="accommodation" value="tenting" /><span>Tenting (this has a cost)</span>
+            </label>
+            <label> <input type="radio" name="accommodation" value="billeting" /> <span>Billeting</span></label>
+            <label> <input type="radio" name="accommodation" value="townhouse" /> <span>Townhouse</span></label>
+          </div>
+        </div>
+
+        <h2>Just a few more questions…</h2>
+
+        <div>
+          Are you attending the AGM?
+          <div class="row">
+            <label><input type="radio" name="attendingAGM" value="yes" /> <span>Yes</span></label>
+            <label><input type="radio" name="attendingAGM" value="no" /> <span>No</span></label>
+          </div>
+        </div>
+
+        <div>
+          Are you attending the celebration of life for Maryann?
+          <div class="row">
+            <label><input type="radio" name="attendingCelebration" value="yes" /> <span>Yes</span></label>
+            <label><input type="radio" name="attendingCelebration" value="no" /> <span>No</span></label>
+          </div>
+        </div>
+
+        <label>
+          Special Notes / Anything we should know?
+          <div>
+            <textarea name="specialNotes"></textarea>
+          </div>
+        </label>
+
+        <div>
+          Would you like to request financial assistance?
+          <div class="row">
+            <label><input type="radio" name="financialAssistance" value="yes" /> <span>Yes</span></label>
+            <label><input type="radio" name="financialAssistance" value="no" /> <span>No</span></label>
+          </div>
+        </div>
+
+        <div>
+          Would you be able to pay a little extra?
+          <div class="row">
+            <label><input type="radio" name="payExtra" value="yes" /> <span>Yes</span></label>
+            <label><input type="radio" name="payExtra" value="no" /> <span>No</span></label>
+          </div>
+        </div>
+
+        <input type="submit" value="Register!" />
+      </form>
+    </section>
+  </body>
+</html>
