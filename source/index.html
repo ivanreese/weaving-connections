@@ -6,6 +6,7 @@
     <meta name="description" content="Join us for three days of basketry workshops, sharing, and community." />
     <link rel="stylesheet" href="fonts.css" />
     <link rel="stylesheet" href="style.css" />
+    <script type="module" src="index.js"></script>
   </head>
   <body>
     <header>
@@ -45,82 +46,47 @@
       </a>
     </nav>
 
-    <section id="workshops">
-      <!-- Would be nice to be able to sort these, since the horizontal scroll sort of biases in favour of the earlier ones. Not sure that the cards are the right design. -->
+    <section id="register">
+      <h1>Register</h1>
 
-      <div id="cloud">
-        <h1>Workshops</h1>
-        <img src="/images/workshop-1.jpg" alt="" />
-        <img src="/images/workshop-2.jpg" alt="" />
-        <img src="/images/workshop-3.jpg" alt="" />
-        <img src="/images/workshop-4.jpg" alt="" />
-        <img src="/images/workshop-5.jpg" alt="" />
-        <img src="/images/workshop-6.jpg" alt="" />
-        <img src="/images/workshop-7.jpg" alt="" />
-        <img src="/images/workshop-8.jpg" alt="" />
-        <img src="/images/workshop-9.jpg" alt="" />
-        <img src="/images/workshop-10.jpg" alt="" />
-        <img src="/images/workshop-11.jpg" alt="" />
-        <img src="/images/workshop-12.jpg" alt="" />
-        <img src="/images/workshop-13.jpg" alt="" />
-        <img src="/images/workshop-14.jpg" alt="" />
-        <img src="/images/workshop-15.jpg" alt="" />
-        <img src="/images/workshop-16.jpg" alt="" />
-        <img src="/images/workshop-17.jpg" alt="" />
-        <img src="/images/workshop-18.jpg" alt="" />
+      <form>
+        <p>
+          Enter your email address to begin or edit your registration. We'll send you an email with a secure link to our
+          registration form.
+        </p>
+        <label>
+          <span>Email Address</span>
+          <input type="email" name="email" />
+        </label>
+        <input type="submit" value="Register!" />
+      </form>
+
+      <div class="hidden loading">
+        <p>Sending…</p>
       </div>
 
-      <div class="day simps">
-        <h2>Simps</h2>
-        <ul>
-          {{CARDS}}
-        </ul>
+      <div class="hidden success">
+        <p>Please check your email. You should soon receive a link to log in and complete your registration.</p>
+        <p>The email will be sent by "Val Town", a friendly service we're using to host our registration form.</p>
+        <p>
+          If you don't receive the email within a minute or two, first check your spam folder, and if it's not there
+          reach out to Freyja at <em>fulveland@gmail.com</em>
+        </p>
       </div>
 
-      <div class="day duos">
-        <h2>Duos</h2>
-        <ul>
-          {{CARDS}}
-        </ul>
-      </div>
-
-      <div class="day grid">
-        <h2>Grid</h2>
-        <ul>
-          {{CARDS}}
-        </ul>
-      </div>
-
-      <div class="day cards">
-        <div class="card-header">
-          <h2>Cards</h2>
-          <button class="prev" aria-label="Previous">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-              <path
-                d="M21.559,12.062 L15.618,17.984 L21.5221,23.944 C22.105,24.533 22.1021,25.482 21.5131,26.065 C21.2211,26.355 20.8391,26.4999987 20.4571,26.4999987 C20.0711,26.4999987 19.6851,26.352 19.3921,26.056 L12.4351,19.034 C11.8531,18.446 11.8551,17.4999987 12.4411,16.916 L19.4411,9.938 C20.0261,9.353 20.9781,9.354 21.5621,9.941 C22.1471,10.528 22.1451,11.478 21.5591,12.062 L21.559,12.062 Z"
-              ></path>
-            </svg>
-          </button>
-          <button class="next" aria-label="Next">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-              <path
-                d="M23.5587,16.916 C24.1447,17.4999987 24.1467,18.446 23.5647,19.034 L16.6077,26.056 C16.3147,26.352 15.9287,26.4999987 15.5427,26.4999987 C15.1607,26.4999987 14.7787,26.355 14.4867,26.065 C13.8977,25.482 13.8947,24.533 14.4777,23.944 L20.3818,17.984 L14.4408,12.062 C13.8548,11.478 13.8528,10.5279 14.4378,9.941 C15.0218,9.354 15.9738,9.353 16.5588,9.938 L23.5588,16.916 L23.5587,16.916 Z"
-              ></path>
-            </svg>
-          </button>
-        </div>
-        <ul tabindex="0" aria-label="List of workshops for Monday">
-          {{CARDS}}
-        </ul>
-        <script>
-          let list = document.querySelector(".cards ul")
-          let firstItem = list.firstElementChild
-          let scrollCards = (dir) => list.scrollBy({ left: dir * firstItem.offsetWidth, behavior: "smooth" })
-          document.querySelector(".prev").onclick = () => scrollCards(-1)
-          document.querySelector(".next").onclick = () => scrollCards(1)
-        </script>
+      <div class="hidden failure">
+        <p>
+          An unexpected error occurred. Please try again, or reach out to Freyja at <em>fulveland@gmail.com</em> for
+          help.
+        </p>
       </div>
     </section>
+
+    <section id="workshops">
+      <h1>Workshops</h1>
+      <div class="cards">{{CARDS}}</div>
+    </section>
+
     <section id="attending">
       <h1>Attending</h1>
 
