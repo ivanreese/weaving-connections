@@ -6,11 +6,12 @@
     <meta name="description" content="Join us for three days of basketry workshops, sharing, and community." />
     <link rel="stylesheet" href="fonts.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="index.css" />
     <script type="module" src="index.js"></script>
   </head>
   <body>
     <header>
-      <img src="/images/title.jpg" alt="" />
+      <img src="/images/title.webp" alt="" />
       <div class="banner">
         <h1>Weaving Connections</h1>
         <div class="subtitle">Basketry Retreat</div>
@@ -22,7 +23,7 @@
     <div id="intro">
       <p>
         Alberta's very own basket weaving retreat is back for its third year. We invite you to join our circle and share
-        the joy of making something with your hands. Bring your family — there's plenty of food and camping space for
+        the joy of making something with your hands. Bring your family — there's plenty of food and camping space for
         all.
       </p>
       <p>
@@ -46,45 +47,9 @@
       </a>
     </nav>
 
-    <section id="register">
-      <h1>Register</h1>
-
-      <form>
-        <p>
-          Enter your email address to begin or edit your registration. We'll send you an email with a secure link to our
-          registration form.
-        </p>
-        <label>
-          <span>Email Address</span>
-          <input type="email" name="email" />
-        </label>
-        <input type="submit" value="Register!" />
-      </form>
-
-      <div class="hidden loading">
-        <p>Sending…</p>
-      </div>
-
-      <div class="hidden success">
-        <p>Please check your email. You should soon receive a link to log in and complete your registration.</p>
-        <p>The email will be sent by "Val Town", a friendly service we're using to host our registration form.</p>
-        <p>
-          If you don't receive the email within a minute or two, first check your spam folder, and if it's not there
-          reach out to Freyja at <em>fulveland@gmail.com</em>
-        </p>
-      </div>
-
-      <div class="hidden failure">
-        <p>
-          An unexpected error occurred. Please try again, or reach out to Freyja at <em>fulveland@gmail.com</em> for
-          help.
-        </p>
-      </div>
-    </section>
-
     <section id="workshops">
       <h1>Workshops</h1>
-      <div class="cards">{{CARDS}}</div>
+      <div class="grid">{{CARDS}}</div>
     </section>
 
     <section id="attending">
@@ -132,17 +97,19 @@
         </p>
       </div>
       <div>
-        <h2>Location</h2>
-
         <div class="location-row">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d151909.57515177235!2d-113.41181480433609!3d53.49370680000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0112abcc9909b%3A0x618dcab44341d23!2sAspen%20Ridge%20Greenhouses!5e0!3m2!1sen!2sca!4v1731478546810!5m2!1sen!2sca"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+          <div class="gmap">
+            <h2>Location</h2>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d151909.57515177235!2d-113.41181480433609!3d53.49370680000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0112abcc9909b%3A0x618dcab44341d23!2sAspen%20Ridge%20Greenhouses!5e0!3m2!1sen!2sca!4v1731478546810!5m2!1sen!2sca"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
 
           <div class="address">
+            <h3>Address</h3>
             <div>
               <p>7-52257 Range Road 231</p>
               <p>Sherwood Park, AB</p>
@@ -155,13 +122,52 @@
             >
             <a href="https://maps.app.goo.gl/XdmLeHtJb16Bbz8p7" target="_blank">Google Maps</a>
           </div>
-        </div>
 
-        <div id="parking">
-          <h3>Parking</h3>
-          <img class="map" src="/images/parking.jpg" alt="" />
+          <div id="parking" class="dialog">
+            <h3>Parking</h3>
+            <p>Click map to enlarge</p>
+            <img class="dialoger map" src="/images/parking.jpg" alt="" />
+            <dialog>
+              <img src="/images/parking.jpg" alt="" />
+            </dialog>
+          </div>
         </div>
       </div>
     </section>
+
+    <section id="register">
+      <h1>Register</h1>
+
+      <p>Enter your email address, and we'll send you a secure link to our registration form.</p>
+
+      <form>
+        <label>
+          <span>Email Address</span>
+          <input type="email" name="email" />
+        </label>
+        <input type="submit" value="Send me the link!" />
+      </form>
+
+      <div class="hidden loading">
+        <p>Sending…</p>
+      </div>
+
+      <div class="hidden success">
+        <p>Please check your email. You should soon receive a link to log in and complete your registration.</p>
+        <p>The email will be sent by "Val Town", a friendly service we're using to host our registration form.</p>
+        <p>
+          If you don't receive the email within a minute or two, first check your spam folder, and if it's not there
+          reach out to Freyja at <em>fulveland@gmail.com</em>
+        </p>
+      </div>
+
+      <div class="hidden failure">
+        <p>
+          An unexpected error occurred. Please try again, or reach out to Freyja at <em>fulveland@gmail.com</em> for
+          help.
+        </p>
+      </div>
+    </section>
+    <footer>We're excited to see what you weave!</footer>
   </body>
 </html>

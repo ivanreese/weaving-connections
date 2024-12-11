@@ -1,8 +1,16 @@
-const form = document.querySelector("form")!
-const input = document.querySelector("input")!
-const loading: HTMLElement = document.querySelector(".loading")!
-const success: HTMLElement = document.querySelector(".success")!
-const failure: HTMLElement = document.querySelector(".failure")!
+document.querySelectorAll(".dialog").forEach((container) => {
+  const dialoger = container.querySelector(".dialoger")
+  const dialog = container.querySelector("dialog")
+  if (!dialoger || !dialog) return
+  dialoger.addEventListener("click", () => dialog.showModal())
+  dialog.addEventListener("click", () => dialog.close())
+})
+
+const form = document.querySelector("#register form")!
+const input = form.querySelector("input")!
+const loading: HTMLElement = document.querySelector("#register .loading")!
+const success: HTMLElement = document.querySelector("#register .success")!
+const failure: HTMLElement = document.querySelector("#register .failure")!
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault()

@@ -11,9 +11,9 @@ task "build", "", ()->
   rm "public"
 
   workshopCardTemplate = read "templates/workshop-card.html"
-  workshopsJson = JSON.parse read "workshops.json"
+  workshopsJson = JSON.parse read "source/workshops.json"
 
-  workshopCardElms = for workshop in workshopsJson
+  workshopCardElms = for name, workshop of workshopsJson
     card = workshopCardTemplate
     card = replace card, "{{#{k}}}": v for k, v of workshop
     indent card
@@ -24,7 +24,7 @@ task "build", "", ()->
     dest = replace path, "source/": "public/"
     write dest, replace read(path), "{{CARDS}}": cardsHtml
 
-  compile "static", "source/**/*.!(ts|html|json)", (path)->
+  compile "static", "source/**/*.!(ts|html)", (path)->
     copy path, replace path, "source/": "public/"
 
   compile "typescript", "source/**/*.ts", (path)->

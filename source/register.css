@@ -1,0 +1,120 @@
+.row {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+
+.row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  background: #fff9;
+  padding: 0.2em 0.4em;
+  border: 1.5px solid currentcolor;
+  color: var(--dark-blue);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.row label * {
+  cursor: pointer;
+}
+
+.workshop-tokens {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+  justify-items: center;
+}
+
+.workshop-token {
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  background: #fff8;
+  box-shadow: 0 1px 4px #6421, 0 2px 8px #6421, 0 4px 16px #6421;
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.1s, outline 0.1s;
+  will-change: transform, box-shadow, opacity;
+  cursor: pointer;
+  contain: paint; /* Crop img borders */
+}
+
+.workshop-token:hover {
+  transform: scale(1.015);
+  box-shadow: 0 2px 6px #6422, 0 3px 12px #6422;
+}
+
+.workshop-token:has(.faded) {
+  opacity: 0.3;
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s, outline 0.5s;
+}
+
+.workshop-token:has(input:checked) {
+  outline: 2px solid var(--light-green);
+}
+
+.workshop-token input {
+  display: none;
+}
+
+.workshop-token img {
+  width: 4em;
+  height: auto;
+  aspect-ratio: 0.8;
+  object-fit: cover;
+}
+
+.workshop-token .right {
+  display: flex;
+  width: 100%;
+  flex-flow: column;
+  justify-content: space-evenly;
+  padding: 0.5em;
+}
+
+.workshop-token h5 {
+  margin: 0;
+}
+
+.workshop-token .meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.workshop-token .spots {
+  align-self: flex-end;
+  font-size: 0.8em;
+}
+
+.your-schedule table {
+  width: min(100%, 30em);
+}
+
+.your-schedule td:first-child {
+  text-align: right;
+  padding-right: 1em;
+  width: 8em;
+}
+
+.your-schedule .nuttin {
+  color: var(--red);
+}
+
+.meals .row {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-items: start;
+  gap: 0.5em 1em;
+}
+
+.accommodation .row {
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+form p,
+form span {
+  display: block;
+  max-width: 30em;
+  text-wrap: balance;
+}

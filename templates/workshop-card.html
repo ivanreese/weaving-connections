@@ -1,11 +1,25 @@
-<li class="card" tabindex="0">
-  <img src="/images/workshop-{{image}}" alt="" />
-  <div class="info">
-    <h3>{{title}}</h3>
-    <h4>with {{teacher}}</h4>
+<div class="workshop dialog">
+  <div class="card dialoger">
+    <img src="/photos/{{image}}" />
+    <div class="info">
+      <h3>{{title}}</h3>
+      <h4>with {{teacher}}</h4>
+    </div>
+    <div class="meta">
+      <span class="time">{{scheduleDesc}}</span>
+      <span class="total">${{totalCost}}</span>
+    </div>
   </div>
-  <div class="meta">
-    <span class="time">{{scheduleDesc}}</span>
-    <span class="total">${{totalCost}}</span>
-  </div>
-</li>
+
+  <dialog>
+    <div class="image">
+      <img src="/photos/{{image}}" />
+    </div>
+    <div class="info">
+      <h3>{{title}}</h3>
+      <h4>with {{teacher}}</h4>
+      <p>{{description}}</p>
+      <p><b>Tools you should bring</b><br />{{tools}}</p>
+    </div>
+  </dialog>
+</div>
