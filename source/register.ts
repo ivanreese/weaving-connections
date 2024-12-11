@@ -28,8 +28,7 @@ const formStructure: FormStructure = {
         fridaySupper: "Friday Supper",
         saturdayLunch: "Saturday Lunch",
         saturdaySupper: "Saturday Supper",
-        sundayLunch: "Sunday Lunch",
-        sundaySupper: "Sunday Supper"
+        sundayLunch: "Sunday Lunch"
       }
     },
     potluck: {
@@ -42,7 +41,7 @@ const formStructure: FormStructure = {
     dietaryRestrictions: {
       type: "radio",
       label:
-        "Dietary restrictions? We will strive to meet as many of these needs as possible, but do bring snacks if you think your needs can't be met.",
+        "Dietary restrictions? We will strive to meet as many of these needs as possible, but do bring supplemental food if you think your needs can't be met.",
       options: {
         none: "None",
         vegetarian: "Vegetarian",
@@ -61,7 +60,7 @@ const formStructure: FormStructure = {
       type: "radio",
       label: "Where are you planning to stay? (Note: tenting space is very limited.)",
       options: {
-        tenting: "Tenting in the Greenhouse ($20 for 2 nights)",
+        tenting: "Tenting in the Greenhouse ($30 for the weekend)",
         hotel: "Hotel on my own",
         near: "I live nearby",
         self: "Only coming one day"
@@ -83,20 +82,25 @@ const formStructure: FormStructure = {
       type: "textarea",
       label: "Special Notes / Anything we should know?"
     },
-    faNote: {
-      type: "note",
-      label:
-        "We're happy to offer financial assistance to those who need help with the cost of attending Weaving Connections. This financial assistance is covered by the generous donations of other attendees."
-    },
     financialAssistance: {
-      type: "radio",
-      label: "Would you like to request financial assistance to cover some or all of your fees?",
-      options: { yes: "Yes", no: "No" }
+      label:
+        "We have limited funds for financial assistance. This assistance will be 50% of one day of classes and materials. Participants will still need to pay the registration fee, any meals that they want to participate in, and all fees associated with any additional classes.",
+      type: "checkbox",
+      options: { financialAssistance: "I would like to request financial assistance" }
     },
     payExtra: {
-      type: "radio",
       label: "Would you be able to pay a little extra to cover someone else who needs help with their fees?",
-      options: { yes: "Yes", no: "No" }
+      type: "checkbox",
+      options: { payExtra: "Yes, I can pitch in" }
+    },
+    volunteer: {
+      label: "We're looking for volunteers to help with some of the prep work. If you'd like to help, let us know.",
+      type: "checkbox",
+      options: {
+        cleanGreenhouseWed: "Cleaning the greenhouse on Wednesday (Mar 5th)",
+        helpDuringEvent: "Help during the event",
+        cleanGreenhouseSun: "Cleaning the greenhouse on Sunday night (Mar 9th)"
+      }
     }
   },
   Workshops: await fetch("workshops.json").then((r) => r.json())
@@ -352,7 +356,7 @@ function makeSelection(
 
 function saveValue(name: string, value: any) {
   console.log("save", name, value)
-  fetchJson("https://spiralganglion-weaving.web.val.run/save", { id, name, value })
+  if (id != null) fetchJson("https://spiralganglion-weaving.web.val.run/save", { id, name, value })
 }
 
 function fetchJson(url: string, json: any, method = "POST") {
@@ -382,11 +386,18 @@ async function loadData() {
   const url = new URL(window.location.href)
   id = url.searchParams.get("id")
 
-  if (id == null) return console.log("No ID")
+  // Enable this in prod
+  // if (id == null) return console.log("No ID")
 
-  const res = await fetchJson("https://spiralganglion-weaving.web.val.run/load", { id })
+  let data: Record<string, string>
 
-  const data: Record<string, string> = await res.json()
+  // For testing
+  if (id == null) {
+    data = {}
+  } else {
+    const res = await fetchJson("https://spiralganglion-weaving.web.val.run/load", { id })
+    data = await res.json()
+  }
 
   // TODO: Handle the case where this ID is invalid (like, someone just typed random stuff in the URL)
 
