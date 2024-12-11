@@ -45,6 +45,7 @@ body {
 
 section {
   margin: calc(var(--margin) * 4) var(--margin);
+  scroll-margin-top: 3.5em;
 }
 
 h1 {
