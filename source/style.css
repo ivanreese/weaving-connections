@@ -163,6 +163,11 @@ input[type="submit"]:hover {
   background: white;
 }
 
+input[type="submit"]:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 label > span {
   display: block;
   font-weight: bold;

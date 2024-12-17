@@ -44,6 +44,12 @@
   box-shadow: 0 2px 6px #6422, 0 3px 12px #6422;
 }
 
+.workshop-token.sold-out {
+  background: #0001;
+  pointer-events: none;
+  box-shadow: none;
+}
+
 .workshop-token:has(.faded) {
   opacity: 0.3;
   transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s, outline 0.5s;
@@ -86,6 +92,10 @@
   font-size: 0.8em;
 }
 
+.workshop-token.sold-out .spots {
+  color: var(--red);
+}
+
 .your-schedule table {
   width: min(100%, 30em);
 }
@@ -97,7 +107,7 @@
 }
 
 .your-schedule .nuttin {
-  color: var(--red);
+  color: var(--dark-blue);
 }
 
 .meals .row {
@@ -117,4 +127,10 @@ form span {
   display: block;
   max-width: 30em;
   text-wrap: balance;
+}
+
+.subtotal {
+  position: fixed;
+  top: 1em;
+  right: 1em;
 }
