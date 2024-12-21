@@ -8,10 +8,11 @@ const formStructure: FormStructure = {
     phone: { type: "tel", label: "Phone" },
     firstAider: {
       type: "radio",
-      label: "Are you a first aider?",
+      label: "Are you a currently certified first aider?",
       options: { yes: "Yes", no: "No" }
     },
-    emergencyContact: { type: "text", label: "Emergency Contact" }
+    emergencyContactName: { type: "text", label: "Emergency Contact (Name)" },
+    emergencyContactPhone: { type: "text", label: "Emergency Contact (Phone)" }
   },
   Meals: {
     faNote: {
@@ -77,10 +78,6 @@ const formStructure: FormStructure = {
       label: "Are you attending the celebration of life for Maryann?",
       options: { yes: "Yes", no: "No" }
     },
-    specialNotes: {
-      type: "textarea",
-      label: "Special Notes / Anything we should know?"
-    },
     financialAssistance: {
       label:
         "We have limited funds for financial assistance. This assistance will be 50% of one day of classes and materials. Participants will still need to pay the registration fee, any meals that they want to participate in, and all fees associated with any additional classes.",
@@ -88,9 +85,9 @@ const formStructure: FormStructure = {
       options: { financialAssistance: "I would like to request financial assistance" }
     },
     payExtra: {
+      type: "radio",
       label: "Would you be able to pay a little extra to cover someone else who needs help with their fees?",
-      type: "checkbox",
-      options: { payExtra: "Yes, I can pitch in" }
+      options: { 0: "No thanks", 10: "$10", 25: "$25", 50: "$50" }
     },
     volunteer: {
       label: "We're looking for volunteers to help with some of the prep work. If you'd like to help, let us know.",
@@ -100,6 +97,10 @@ const formStructure: FormStructure = {
         helpDuringEvent: "Help during the event",
         cleanGreenhouseSun: "Cleaning the greenhouse on Sunday night (Mar 9th)"
       }
+    },
+    specialNotes: {
+      type: "textarea",
+      label: "Special Notes / Anything you'd like us to know?"
     }
   },
   Workshops: (await fetch("workshops.json").then((r) => r.json())) as Workshops
@@ -258,7 +259,7 @@ function updateSchedule(rows: Row[]) {
     let d: Row | null = filteredRows[0]
     let tr = tag("tr", table)
     tag("td", tr, time)
-    let title = tag("td", tr, d?.details?.title ?? "Free time")
+    let title = tag("td", tr, d?.details?.title ?? "Free time / Open Weave")
     if (d == null) title.className = "nuttin"
   }
 }
