@@ -11,8 +11,12 @@ const formStructure: FormStructure = {
       label: "Are you a currently certified first aider?",
       options: { yes: "Yes", no: "No" }
     },
-    emergencyContactName: { type: "text", label: "Emergency Contact (Name)" },
-    emergencyContactPhone: { type: "text", label: "Emergency Contact (Phone)" }
+    emergencyContactName: { type: "text", label: "Emergency Contact — Name & Phone Number" },
+    photoConsent: {
+      type: "checkbox",
+      label: "We will be taking photos of the event, and sharing them on our website and social media.",
+      options: { yes: "I consent to having my photo taken & shared online." }
+    }
   },
   Meals: {
     faNote: {
@@ -106,14 +110,6 @@ const formStructure: FormStructure = {
   Workshops: (await fetch("workshops.json").then((r) => r.json())) as Workshops
 }
 
-const costs = {
-  fridayLunch: { is: true, cost: 25 },
-  fridaySupper: { is: true, cost: 30 },
-  saturdayLunch: { is: true, cost: 25 },
-  saturdaySupper: { is: true, cost: 30 },
-  sundayLunch: { is: true, cost: 25 }
-}
-
 type FormStructure = Record<SectionName, SectionFields | Workshops>
 type SectionName = string
 
@@ -191,7 +187,7 @@ function makeWorkshops(form: HTMLFormElement, workshops: Workshops, data = {}) {
   tag(
     "p",
     form,
-    "Select the workshops you'd like to register for. You may only select one workshop per time slot. Feel free to leave some time empty, or just attend for one day."
+    "<p>Select the workshops you'd like to register for. You may only select one workshop per time slot. Feel free to leave some time empty, or just attend for one day.</p></p>If you want to learn more about each of the workshops, <a href='/#workshops' target='_blank'>click here.</a></p>"
   )
 
   let elm = tag("div", form)
@@ -400,32 +396,42 @@ function saveData() {
 function updateSubtotal() {
   let subtotal = 0
   subtotalElm.innerHTML = ""
-
-  // Registration fee
-  subtotal += 25
   let tr = tag("tr", subtotalElm)
-  tag("td", tr, "Registration Fee")
-  tag("td", tr, "$25")
 
-  // Go through all the fields in our saved data, and see if any of them have a cost associated with them
-  // If the field is one of the things we explicitly list a cost for (eg: meals) then grab that cost
-  for (const field in data) {
-    const costsForField = costs[field as keyof typeof costs]
-    if (costsForField?.is != data[field]) continue
-    subtotal += costsForField.cost
+  let mealCost = 0
+  if (data.fridayLunch) mealCost += 25
+  if (data.fridaySupper) mealCost += 30
+  if (data.saturdayLunch) mealCost += 25
+  if (data.saturdaySupper) mealCost += 30
+  if (data.sundayLunch) mealCost += 25
+  if (mealCost > 0) {
     tr = tag("tr", subtotalElm)
-    tag("td", tr, field)
-    tag("td", tr, "$" + costsForField.cost)
+    tag("td", tr, "Meals")
+    tag("td", tr, "$" + mealCost)
+    subtotal += mealCost
   }
 
+  console.log(data.payExtra)
+
   // If the field is a workshop, then grab its cost
+  let workshopCost = 0
   for (const field in data) {
     const workshop = formStructure.Workshops[field] as WorkshopDetails
     if (workshop == null || data[field] == false) continue
-    subtotal += workshop.totalCost
+    workshopCost += workshop.totalCost
+  }
+
+  if (workshopCost > 0) {
     tr = tag("tr", subtotalElm)
-    tag("td", tr, workshop.title)
-    tag("td", tr, "$" + workshop.totalCost)
+    tag("td", tr, "Workshops")
+    tag("td", tr, "$" + workshopCost)
+    subtotal += workshopCost
+
+    // Registration fee
+    tr = tag("tr", subtotalElm)
+    tag("td", tr, "Registration Fee")
+    tag("td", tr, "$25")
+    subtotal += 25
   }
 
   tr = tag("tr", subtotalElm)

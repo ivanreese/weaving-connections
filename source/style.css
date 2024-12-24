@@ -5,15 +5,15 @@
 }
 
 :root {
-  --cream: #eae1c2;
+  --cream: #ece1be;
   --dark-blue: hsl(230, 36%, 44%);
-  --dark-green: #2b4727;
-  --gold: #b3945a;
-  --gray: #d4d1cd;
+  --dark-green: #224823;
+  --gold: #b99250;
+  --gray: #d5d1cd;
   --light-blue: #c7cbdf;
-  --light-green: hsl(54, 43%, 33%);
-  --maroon: #5b2818;
-  --pink: #b98092;
+  --light-green: #797122;
+  --maroon: hsl(15, 50%, 25%); /* variant of #632413; */
+  --pink: #c37d92;
   --red: #cd563c;
 
   --font-white: hsl(180, 2%, 91%);
@@ -21,7 +21,9 @@
 
   --background: hsl(50, 18%, 93%);
   --background-dark: hsl(50, 11%, 89%);
-  --bg-light: hsl(43, 28%, 94%);
+
+  /* --bg-light: hsl(43, 28%, 94%); */
+  --bg-light: hsl(45, 35%, 96%);
 
   --margin: min(2vw, 2rem);
 }
@@ -44,7 +46,7 @@ body {
 }
 
 section {
-  margin: calc(var(--margin) * 4) var(--margin);
+  margin: calc(var(--margin) * 3) var(--margin);
   scroll-margin-top: 3.5em;
 }
 
@@ -53,13 +55,13 @@ h1 {
   text-align: center;
   font-size: 3em;
   font-family: baloo;
-  color: var(--light-green);
+  color: var(--maroon);
 }
 
 h2 {
   margin: 0;
   font-size: 2em;
-  font-family: baloo;
+  font-family: vollkorn;
   color: var(--light-green);
 }
 
@@ -74,7 +76,7 @@ h3 {
 h4 {
   font-size: 1.25em;
   margin: 0;
-  font-family: baloo;
+  font-family: vollkorn;
 }
 
 p {
@@ -99,21 +101,14 @@ select {
 }
 
 .dialoger {
+  border: none;
+  padding: 0;
   cursor: pointer;
 }
 
 dialog {
+  outline: 0;
   cursor: pointer;
-}
-
-dialog:modal {
-  animation: pull-in 0.3s both;
-}
-
-@keyframes pull-in {
-  from {
-    scale: 0.98;
-  }
 }
 
 dialog::backdrop {
@@ -123,19 +118,19 @@ dialog::backdrop {
 /* FORM ******************************************************************************************/
 
 form {
-  padding: 0.5em 0;
-  padding-bottom: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 1em;
+  padding: 0.5em 0 1em;
+}
+
+form h2 {
+  grid-column: span 2;
 }
 
 form * + h2 {
   margin-top: 1em;
-}
-
-form > label,
-form > div,
-form > fieldset {
-  display: block;
-  margin: 0 0 1em;
 }
 
 input[type="text"],
