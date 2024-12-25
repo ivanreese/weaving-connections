@@ -15,6 +15,7 @@
   --maroon: hsl(15, 50%, 25%); /* variant of #632413; */
   --pink: #c37d92;
   --red: #cd563c;
+  --orange: #de4c31;
 
   --font-white: hsl(180, 2%, 91%);
   --font-black: hsl(42, 14%, 14%);
@@ -47,7 +48,7 @@ body {
 
 section {
   margin: calc(var(--margin) * 3) var(--margin);
-  scroll-margin-top: 3.5em;
+  scroll-margin-top: 5.5em;
 }
 
 h1 {
@@ -62,7 +63,7 @@ h2 {
   margin: 0;
   font-size: 2em;
   font-family: vollkorn;
-  color: var(--light-green);
+  color: var(--maroon);
 }
 
 h3 {
@@ -70,7 +71,7 @@ h3 {
   font-size: 1.5em;
   line-height: 1;
   font-family: baloo;
-  color: var(--pink);
+  color: var(--maroon);
 }
 
 h4 {
@@ -93,13 +94,6 @@ img {
   vertical-align: middle;
 }
 
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
 .dialoger {
   border: none;
   padding: 0;
@@ -118,27 +112,22 @@ dialog::backdrop {
 /* FORM ******************************************************************************************/
 
 form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: end;
-  gap: 1em;
   padding: 0.5em 0 1em;
 }
 
-form h2 {
-  grid-column: span 2;
-}
-
-form * + h2 {
-  margin-top: 1em;
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="tel"],
+input[type="submit"],
 textarea {
   width: 100%;
-  max-width: 40ch;
   padding: 0.2em 0.4em;
   border: 1.5px solid var(--dark-blue);
   border-radius: 4px;
@@ -147,11 +136,7 @@ textarea {
 
 input[type="submit"] {
   width: auto;
-  max-width: 40ch;
-  padding: 0.2em 0.4em;
-  border: 1.5px solid currentcolor;
   color: var(--dark-blue);
-  border-radius: 4px;
   background: hsl(230 100% 97% / 0.5);
   cursor: pointer;
 }

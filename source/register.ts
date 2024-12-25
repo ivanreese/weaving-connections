@@ -5,28 +5,30 @@ const formStructure: FormStructure = {
     fullName: { type: "text", label: "Full Name" },
     preferredName: { type: "text", label: "What would you like us to call you?" },
     pronouns: { type: "text", label: "Preferred Pronouns" },
-    phone: { type: "tel", label: "Phone" },
+    phone: { type: "tel", label: "Phone Number" },
+    emergencyContactName: { type: "text", label: "Emergency Contact — Name & Phone Number" },
     firstAider: {
       type: "radio",
       label: "Are you a currently certified first aider?",
       options: { yes: "Yes", no: "No" }
     },
-    emergencyContactName: { type: "text", label: "Emergency Contact — Name & Phone Number" },
     photoConsent: {
       type: "checkbox",
+      class: "wide",
       label: "We will be taking photos of the event, and sharing them on our website and social media.",
       options: { yes: "I consent to having my photo taken & shared online." }
     }
   },
   Meals: {
-    faNote: {
+    mealNote: {
       type: "note",
       label:
-        "Which meals will you require? Feel free to bring potluck snacks, a mug for tea, and any specialty needs. Lunch and supper will be provided by Elvira of Under the Linden Bakehouse. $25 for lunch and $30 for supper. Please bring a plate, bowl, and cutlery. Community cleanup will be appreciated."
+        "Elvira of Under the Linden Bakehouse will be preparing vegetarian lunches and suppers for all takers. The cost is $25 per lunch and $30 per supper. Please bring your own plate, bowl, and cutlery, and kindly help out a bit with the cleanup.<br><br>Of course, feel free to bring your own food & snacks, a mug for tea, and any specialty needs."
     },
     meals: {
       type: "checkbox",
-      label: "Which days are you having a meal?",
+      class: "wide",
+      label: "Which meals would you like to purchase?",
       options: {
         fridayLunch: "Friday Lunch",
         fridaySupper: "Friday Supper",
@@ -37,6 +39,7 @@ const formStructure: FormStructure = {
     },
     potluck: {
       type: "checkbox",
+      class: "wide",
       label: "For those who are interested, we will be organizing a potluck supper Friday and Saturday night.",
       options: {
         potluck: "I'd like to participate in the potluck."
@@ -44,8 +47,9 @@ const formStructure: FormStructure = {
     },
     dietaryRestrictions: {
       type: "radio",
+      class: "wide",
       label:
-        "Dietary restrictions? We will strive to meet as many of these needs as possible, but do bring supplemental food if you think your needs can't be met.",
+        "Do you have any dietary restrictions? We will strive to meet as many of these needs as possible, but do bring supplemental food if you think your needs can't be met.",
       options: {
         none: "None",
         vegetarian: "Vegetarian",
@@ -62,52 +66,64 @@ const formStructure: FormStructure = {
   Accommodations: {
     accommodation: {
       type: "radio",
-      label: "Where are you planning to stay? (Note: tenting space is very limited.)",
+      class: "wide",
+      label:
+        "Where are you planning to stay?<br><br>About tenting: space is very limited, it costs $30 for the weekend, billed separately.",
       options: {
-        tenting: "Tenting in the Greenhouse ($30 for the weekend, billed separately)",
+        tenting: "Tenting in the Greenhouse",
         hotel: "Hotel on my own",
         near: "I live nearby",
         self: "Only coming one day"
       }
     }
   },
-  "Just a few more questions...": {
+  Activities: {
     attendingAGM: {
       type: "radio",
-      label: "Are you attending the AGM?",
+      label: 'Are you planning to attend the <a href="/#attending">Annual General Meeting</a> on Friday night?',
       options: { yes: "Yes", no: "No" }
     },
     attendingCelebration: {
       type: "radio",
-      label: "Are you attending the celebration of life for Maryann?",
+      label:
+        'Are you planning to attend the <a href="/#attending">celebration of life for Maryann</a> on Saturday night?',
       options: { yes: "Yes", no: "No" }
     },
+    volunteer: {
+      label:
+        "We're looking for volunteers to help clean the greenhouse, and help during the event. Care to lend a hand?",
+      class: "wide",
+      type: "checkbox",
+      options: {
+        cleanGreenhouseWed: "Cleaning on Wednesday (Mar 5th)",
+        helpDuringEvent: "Help during the event",
+        cleanGreenhouseSun: "Cleaning on Sunday night (Mar 9th)"
+      }
+    }
+  },
+  "Financial Assistance": {
     financialAssistance: {
+      type: "checkbox",
       label:
         "We have limited funds for financial assistance. This assistance will be 50% of one day of classes and materials. Participants will still need to pay the registration fee, any meals that they want to participate in, and all fees associated with any additional classes.",
-      type: "checkbox",
+      class: "wide",
       options: { financialAssistance: "I would like to request financial assistance" }
     },
     payExtra: {
       type: "radio",
+      class: "wide",
       label: "Would you be able to pay a little extra to cover someone else who needs help with their fees?",
       options: { 0: "No thanks", 10: "$10", 25: "$25", 50: "$50" }
-    },
-    volunteer: {
-      label: "We're looking for volunteers to help with some of the prep work. If you'd like to help, let us know.",
-      type: "checkbox",
-      options: {
-        cleanGreenhouseWed: "Cleaning the greenhouse on Wednesday (Mar 5th)",
-        helpDuringEvent: "Help during the event",
-        cleanGreenhouseSun: "Cleaning the greenhouse on Sunday night (Mar 9th)"
-      }
-    },
-    specialNotes: {
-      type: "textarea",
-      label: "Special Notes / Anything you'd like us to know?"
     }
   },
-  Workshops: (await fetch("workshops.json").then((r) => r.json())) as Workshops
+  Workshops: (await fetch("workshops.json").then((r) => r.json())) as Workshops,
+  "Finally…": {
+    specialNotes: {
+      type: "textarea",
+      class: "wide",
+      label: "If you have any final comments, special notes, things you'd like us to know, leave them here."
+    }
+  }
 }
 
 type FormStructure = Record<SectionName, SectionFields | Workshops>
@@ -119,13 +135,14 @@ type FieldName = string // MUST BE UNIQUE ACROSS ALL SECTIONS — this is the ke
 type Field = Note | TextyField | CheckboxField | RadioField
 type TextyField = TextField | TelField | EmailField | TextArea
 
-type CheckboxField = { type: "checkbox"; label: string; options: Record<string, string> } // OPTION KEY MUST BE UNIQUE
-type RadioField = { type: "radio"; label: string; options: Record<string, string> }
-type TextField = { type: "text"; label: string }
-type TextArea = { type: "textarea"; label: string }
-type TelField = { type: "tel"; label: string }
-type EmailField = { type: "email"; label: string }
-type Note = { type: "note"; label: string }
+type BasicField = { label: string; class?: string }
+type CheckboxField = BasicField & { type: "checkbox"; options: Record<string, string> } // OPTION KEY MUST BE UNIQUE
+type RadioField = BasicField & { type: "radio"; options: Record<string, string> }
+type TextField = BasicField & { type: "text" }
+type TextArea = BasicField & { type: "textarea" }
+type TelField = BasicField & { type: "tel" }
+type EmailField = BasicField & { type: "email" }
+type Note = BasicField & { type: "note" }
 
 type Workshops = Record<WorkshopId, WorkshopDetails>
 type WorkshopId = string
@@ -153,15 +170,20 @@ function generateForm(structure: FormStructure, data = {}) {
     if (sectionName == "Workshops") {
       makeWorkshops(form, fields as Workshops, data)
     } else {
+      let section = tag("div", form)
+      section.className = "grid"
+
       for (const fieldName in fields) {
         const field = fields[fieldName]
-        makeField(form, fieldName, field as Field, data)
+        makeField(section, fieldName, field as Field, data)
       }
     }
   }
 
+  // Make the submit button
   const submit = tag("input", form)
   submit.type = "submit"
+  submit.value = "Proceed to Payment"
   submit.onclick = async (e) => {
     e.preventDefault()
     submit.disabled = true
@@ -184,11 +206,12 @@ type Row = {
 }
 
 function makeWorkshops(form: HTMLFormElement, workshops: Workshops, data = {}) {
-  tag(
-    "p",
+  let intro = tag(
+    "div",
     form,
-    "<p>Select the workshops you'd like to register for. You may only select one workshop per time slot. Feel free to leave some time empty, or just attend for one day.</p></p>If you want to learn more about each of the workshops, <a href='/#workshops' target='_blank'>click here.</a></p>"
+    "<p>Select the workshops you'd like to register for. You may only select one workshop per time slot. Feel free to leave some time empty, or just attend for one day. Note that there's a flat $25 registration fee if you are taking at least one workshop.</p></p>If you want to learn more about each of the workshops, <a href='/#workshops' target='_blank'>click here.</a></p>"
   )
+  intro.className = "workshop-intro"
 
   let elm = tag("div", form)
   elm.className = "workshop-tokens"
@@ -234,8 +257,18 @@ function makeWorkshops(form: HTMLFormElement, workshops: Workshops, data = {}) {
     spots.className = "spots"
   }
 
-  schedule = tag("div", form)
+  let review = tag("div", form)
+  review.className = "review"
+
+  schedule = tag("div", review)
   schedule.className = "your-schedule"
+
+  let subtotalParent = tag("div", review)
+  subtotalParent.className = "subtotal"
+
+  tag("h2", subtotalParent, "Subtotal")
+  subtotalElm = tag("div", subtotalParent)
+  subtotalElm.className = "table"
 
   updateRows(rows)
   updateSchedule(rows)
@@ -244,20 +277,42 @@ function makeWorkshops(form: HTMLFormElement, workshops: Workshops, data = {}) {
 function updateSchedule(rows: Row[]) {
   schedule.innerHTML = ""
 
-  tag("h3", schedule, "Your Workshop Schedule")
-  let table = tag("table", schedule)
+  tag("h2", schedule, "Your Weekend Schedule")
+  let table = tag("div", schedule)
+  table.className = "table"
 
-  let segs = ["Friday AM", "Friday PM", "Saturday AM", "Saturday PM", "Sunday AM", "Sunday PM"]
-  for (let i = 0; i < segs.length; i++) {
-    let time = segs[i]
-    let filteredRows = rows.filter(({ cb, details }) => cb.checked && details.scheduleSlots.includes(i))
+  tag("h3", table, "Friday")
+  addWorkshopToSchedule(0, "9am", rows, table)
+  if (data.fridayLunch) addRowToSchedule(table, "1pm", "Your Lunch Order")
+  addWorkshopToSchedule(1, "2pm", rows, table)
+  if (data.fridaySupper) addRowToSchedule(table, "6pm", "Your Supper Order")
+  if (data.attendingAGM) addRowToSchedule(table, "6:30pm", "Annual General Meeting")
+  tag("h3", table, "Saturday")
+  addWorkshopToSchedule(2, "9am", rows, table)
+  if (data.saturdayLunch) addRowToSchedule(table, "1pm", "Your Lunch Order")
+  addWorkshopToSchedule(3, "2am", rows, table)
+  if (data.saturdaySupper) addRowToSchedule(table, "6pm", "Your Supper Order")
+  if (data.attendingCelebration) addRowToSchedule(table, "6:30pm", "Celebration of Life")
+  tag("h3", table, "Sunday")
+  addWorkshopToSchedule(4, "9am", rows, table)
+  if (data.sundayLunch) addRowToSchedule(table, "1pm", "Your Lunch Order")
+  addWorkshopToSchedule(5, "2am", rows, table)
+}
 
-    let d: Row | null = filteredRows[0]
-    let tr = tag("tr", table)
-    tag("td", tr, time)
-    let title = tag("td", tr, d?.details?.title ?? "Free time / Open Weave")
-    if (d == null) title.className = "nuttin"
-  }
+function addWorkshopToSchedule(i: number, name: string, rows: Row[], table: HTMLElement) {
+  let filteredRows = rows.filter(({ cb, details }) => cb.checked && details.scheduleSlots.includes(i))
+  let d: Row | null = filteredRows[0]
+  let value = d?.details?.title ?? "Free time / Open Weave"
+  let [labelElm, valueElm] = addRowToSchedule(table, name, value)
+  if (d == null) valueElm.className = "nuttin"
+}
+
+function addRowToSchedule(table: HTMLElement, label: string, value: string) {
+  let labelElm = tag("span", table, label)
+  labelElm.className = "label"
+  let valueElm = tag("span", table, value)
+  valueElm.className = "value"
+  return [labelElm, valueElm]
 }
 
 const toggleWorkshop =
@@ -301,36 +356,37 @@ function updateRows(rows: Row[]) {
   })
 }
 
-function makeField(form: HTMLFormElement, fieldName: FieldName, field: Field, data: any) {
+function makeField(parent: HTMLElement, fieldName: FieldName, field: Field, data: any) {
   switch (field.type) {
     case "text":
     case "email":
     case "tel":
-      return makeTexty(form, fieldName, field, data)
+      return makeTexty(parent, fieldName, field, data)
 
     case "textarea":
-      return makeTextarea(form, fieldName, field, data)
+      return makeTextarea(parent, fieldName, field, data)
 
     case "radio":
-      return makeRadio(form, fieldName, field, data)
+      return makeRadio(parent, fieldName, field, data)
 
     case "checkbox":
-      return makeCheckbox(form, fieldName, field, data)
+      return makeCheckbox(parent, fieldName, field, data)
 
     case "note":
-      return tag("p", form, field.label)
+      return tag("p", parent, field.label)
   }
 }
 
-function makeWrapper(type: "label" | "div", form: HTMLFormElement, name: FieldName, label: string) {
-  const wrapper = tag(type, form)
+function makeWrapper(type: "label" | "div", parent: HTMLElement, name: FieldName, field: BasicField) {
+  const wrapper = tag(type, parent)
   wrapper.className = name
-  tag("span", wrapper, label)
+  if (field.class) wrapper.classList.add(field.class)
+  tag("span", wrapper, field.label)
   return wrapper
 }
 
-function makeTexty(form: HTMLFormElement, name: FieldName, field: TextyField, data: any) {
-  const wrapper = makeWrapper("label", form, name, field.label)
+function makeTexty(parent: HTMLElement, name: FieldName, field: TextyField, data: any) {
+  const wrapper = makeWrapper("label", parent, name, field)
   const input = tag("input", wrapper)
   input.type = field.type
   input.name = name
@@ -338,23 +394,23 @@ function makeTexty(form: HTMLFormElement, name: FieldName, field: TextyField, da
   input.addEventListener("change", () => saveValue(name, input.value))
 }
 
-function makeTextarea(form: HTMLFormElement, name: FieldName, field: TextyField, data: any) {
-  const wrapper = makeWrapper("label", form, name, field.label)
+function makeTextarea(parent: HTMLElement, name: FieldName, field: TextyField, data: any) {
+  const wrapper = makeWrapper("label", parent, name, field)
   const input = tag("textarea", wrapper)
   input.name = name
   input.innerHTML = data[name] ?? ""
   input.addEventListener("change", () => saveValue(name, input.value))
 }
 
-function makeRadio(form: HTMLFormElement, name: FieldName, field: RadioField, data: any) {
-  makeSelection("radio", form, name, field, (input, key) => {
+function makeRadio(parent: HTMLElement, name: FieldName, field: RadioField, data: any) {
+  makeSelection("radio", parent, name, field, (input, key) => {
     if (data[name] == key) input.checked = true
     input.addEventListener("change", () => saveValue(name, key))
   })
 }
 
-function makeCheckbox(form: HTMLFormElement, name: FieldName, field: CheckboxField, data: any) {
-  makeSelection("checkbox", form, name, field, (input, key) => {
+function makeCheckbox(parent: HTMLElement, name: FieldName, field: CheckboxField, data: any) {
+  makeSelection("checkbox", parent, name, field, (input, key) => {
     if (data[key]) input.checked = true
     input.addEventListener("change", () => saveValue(key, input.checked))
   })
@@ -364,12 +420,12 @@ type ConfigFn = (input: HTMLInputElement, key: string) => void
 
 function makeSelection(
   type: "radio" | "checkbox",
-  form: HTMLFormElement,
+  parent: HTMLElement,
   name: FieldName,
   field: RadioField | CheckboxField,
   cb: ConfigFn
 ) {
-  const wrapper = makeWrapper("div", form, name, field.label)
+  const wrapper = makeWrapper("div", parent, name, field)
   const row = tag("div", wrapper)
   row.className = "row"
   for (let key in field.options) {
@@ -395,23 +451,8 @@ function saveData() {
 
 function updateSubtotal() {
   let subtotal = 0
+
   subtotalElm.innerHTML = ""
-  let tr = tag("tr", subtotalElm)
-
-  let mealCost = 0
-  if (data.fridayLunch) mealCost += 25
-  if (data.fridaySupper) mealCost += 30
-  if (data.saturdayLunch) mealCost += 25
-  if (data.saturdaySupper) mealCost += 30
-  if (data.sundayLunch) mealCost += 25
-  if (mealCost > 0) {
-    tr = tag("tr", subtotalElm)
-    tag("td", tr, "Meals")
-    tag("td", tr, "$" + mealCost)
-    subtotal += mealCost
-  }
-
-  console.log(data.payExtra)
 
   // If the field is a workshop, then grab its cost
   let workshopCost = 0
@@ -422,21 +463,39 @@ function updateSubtotal() {
   }
 
   if (workshopCost > 0) {
-    tr = tag("tr", subtotalElm)
-    tag("td", tr, "Workshops")
-    tag("td", tr, "$" + workshopCost)
+    tag("td", subtotalElm, "Workshops")
+    tag("td", subtotalElm, "$" + workshopCost)
     subtotal += workshopCost
 
     // Registration fee
-    tr = tag("tr", subtotalElm)
-    tag("td", tr, "Registration Fee")
-    tag("td", tr, "$25")
+    tag("td", subtotalElm, "Registration Fee")
+    tag("td", subtotalElm, "$25")
     subtotal += 25
   }
 
-  tr = tag("tr", subtotalElm)
-  tag("td", tr, "Total")
-  tag("td", tr, "$" + subtotal)
+  let mealCost = 0
+  if (data.fridayLunch) mealCost += 25
+  if (data.fridaySupper) mealCost += 30
+  if (data.saturdayLunch) mealCost += 25
+  if (data.saturdaySupper) mealCost += 30
+  if (data.sundayLunch) mealCost += 25
+
+  if (mealCost > 0) {
+    tag("div", subtotalElm, "Meals")
+    tag("div", subtotalElm, "$" + mealCost)
+    subtotal += mealCost
+  }
+
+  // Needs to be a number, but JSON will sometimes coerce it to a string
+  data.payExtra = +data.payExtra
+  if (data.payExtra > 0) {
+    tag("td", subtotalElm, "Extra Contribution")
+    tag("td", subtotalElm, "$" + data.payExtra)
+    subtotal += data.payExtra
+  }
+
+  tag("td", subtotalElm, "Total")
+  tag("td", subtotalElm, "$" + subtotal)
 }
 
 function fetchJson(url: string, json: any, method = "POST") {
@@ -457,8 +516,7 @@ function tag<K extends keyof HTMLElementTagNameMap>(
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 const loading: HTMLElement = document.querySelector(".loading")!
-const subtotalElm: HTMLElement = document.querySelector(".subtotal")!
-const section = document.querySelector("section")!
+let subtotalElm: HTMLElement
 
 const url = new URL(window.location.href)
 const id = url.searchParams.get("id")
@@ -469,8 +527,8 @@ let remaining: Record<WorkshopId, any> = {}
 // prettier-ignore
 function err(msg: string) {
   loading.remove()
-  tag("h3", section, msg)
-  tag("p", section, "Something went wrong when loading your registration. Please return to the <a href='/'>Weaving Connections</a> home page and try registering again, or email <b>fulveland@gmail.com</b> for help.")
+  tag("h3", document.body, msg)
+  tag("p", document.body, "Something went wrong when loading your registration. Please return to the <a href='/'>Weaving Connections</a> home page and try registering again, or email <b>fulveland@gmail.com</b> for help.")
 }
 
 async function loadData() {
