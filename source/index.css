@@ -65,6 +65,10 @@ nav {
   z-index: 2;
 }
 
+nav a {
+  font-family: baloo;
+}
+
 @media (max-width: 400px) {
   nav {
     gap: 0;
