@@ -290,13 +290,13 @@ function updateSchedule(rows: Row[]) {
   tag("h3", table, "Saturday")
   addWorkshopToSchedule(2, "9am", rows, table)
   if (data.saturdayLunch) addRowToSchedule(table, "1pm", "Your Lunch Order")
-  addWorkshopToSchedule(3, "2am", rows, table)
+  addWorkshopToSchedule(3, "2pm", rows, table)
   if (data.saturdaySupper) addRowToSchedule(table, "6pm", "Your Supper Order")
   if (data.attendingCelebration) addRowToSchedule(table, "6:30pm", "Celebration of Life")
   tag("h3", table, "Sunday")
   addWorkshopToSchedule(4, "9am", rows, table)
   if (data.sundayLunch) addRowToSchedule(table, "1pm", "Your Lunch Order")
-  addWorkshopToSchedule(5, "2am", rows, table)
+  addWorkshopToSchedule(5, "2pm", rows, table)
 }
 
 function addWorkshopToSchedule(i: number, name: string, rows: Row[], table: HTMLElement) {

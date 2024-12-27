@@ -1,8 +1,6 @@
 {
   "texturedBowl": {
     "image": "freyja-textured-bowl.jpg",
-    "width": 2000,
-    "height": 1000,
     "layout": "wide",
     "description": "Learn to weave a textured bowl using a rope coil weave. We'll start with a 3x3 slath base, then weave a 4-rod drop-down wale to create a slight foot before moving up the sides with the rope coil weave. Once you get the hang of it, this weave moves quickly. The basket will be finished with a rod border. <br><br>While the rope coil weave is not difficult to learn, some previous weaving experience would be helpful.",
     "title": "Textured Willow Bowl",
@@ -18,8 +16,6 @@
   },
   "coveredWaterBottle": {
     "image": "cathie-covered-bottle.jpg",
-    "width": 1187,
-    "height": 2608,
     "layout": "narrow",
     "description": "Keep your favourite beverages hot or cold with the covered bottle that uses willow, birch and red cedar barks, cattail, dyed jute cord, artificial sinew and waxed linen. Participants are encouraged to bring their own danglers to personalize their bottle.<br><br>Weaves will include twining, plating and 3 rod wale. <br><br>Price includes an aluminium water bottle<br><br>Dimensions: 9” h x 4” w <br><br>Experience: All levels<br><br>",
     "title": "Covered Water Bottle",
@@ -35,8 +31,6 @@
   },
   "wildHarvestingStewardship": {
     "image": "betty-stewardship.jpg",
-    "width": 2268,
-    "height": 4032,
     "layout": "",
     "description": "Learn how to identify & coppice wild willow, weave a multipurpose hanging garlic/suet/orchid holder from a jig with the willow we harvest!",
     "title": "Wild Harvesting & Stewardship",
@@ -52,8 +46,6 @@
   },
   "threeHandbrooms": {
     "image": "kayla-handbroom.jpg",
-    "width": 532,
-    "height": 640,
     "layout": "",
     "description": "In this workshop, participants will be guided through the process of making three different types of hand brooms that they will then take home with them. Broom-making is a practice steeped in tradition, and each broom you create is functional.<br><br>During the workshop, you will:<br>Create a mini hand broom, woven whisk and stitched hand broom from start to finish.<br>Learn tips and techniques for choosing the correct binding, attaching the hurl, and caring for your brooms.<br><br> Material (Hurl, Tampico, Reed and Cord) colour combinations are subject to availability and may change over time.",
     "title": "3 Handbrooms",
@@ -69,8 +61,6 @@
   },
   "catalanTray": {
     "image": "karla-catalan-tray.jpg",
-    "width": 2000,
-    "height": 1500,
     "layout": "wide",
     "description": "These woven tension trays from Spanish design are both functional and decorative. Students will work with foraged willow and learn hoop making and simple weaving technique as well as twining to create their own Catalan Tray.",
     "title": "Catalan Tray",
@@ -86,8 +76,6 @@
   },
   "willowSwedishStars": {
     "image": "karla-swedish-star.jpg",
-    "width": 1500,
-    "height": 2000,
     "layout": "",
     "description": "Create an elegant Swedish Star from foraged willow. The design can be scaled large or small, and you can bring decorative yarn, cordage, or fabric to adorn your star.",
     "title": "Willow Swedish Stars",
@@ -103,8 +91,6 @@
   },
   "cuteWallThing": {
     "image": "mia-wall-thing.jpg",
-    "width": 2000,
-    "height": 1000,
     "layout": "wide",
     "description": "In this workshop, we'll create a charming wall-hanging basket using a circular wood base (also called a \"wood cookie\"). <br><br>What You'll Learn:<br><br>Base Preparation: Work with a pre-dried wood circle, complete with holes drilled around the edge.<br><br>Weaving Techniques: Learn the three-rod wale method and back-and-forth pairing to form the basket.<br><br>Finishing Touch: Complete your basket with a two-behind-one border or a trac border.<br><br>Mia's goal is to create a warm environment to inspire you to make a second basket!",
     "title": "Beginner-Friendly Wall Hanging Basket",
@@ -120,8 +106,6 @@
   },
   "cobwebberBroom": {
     "image": "kayla-broom.jpg",
-    "width": 532,
-    "height": 640,
     "layout": "",
     "description": "Learn to make a cobwebber style broom made from broomcorn using traditional broom making techniques.",
     "title": "Cobwebber Broom",
@@ -137,8 +121,6 @@
   },
   "willowGardenTrugAndWallBasket": {
     "image": "cathie-2hs.jpg",
-    "width": 2000,
-    "height": 1411,
     "layout": "wide",
     "description": "Spend two days making two different, functional willow baskets, both using the stake and strand technique and round bases.<br><br>Need something to bring the bounty in from the garden?  The first basket is designed to bring your garden bounty in. The round base will end up with an oval shaped basket.  Weaves will include twining, 3 rod wale and French randing.  The rim will be a basic 3-1 rim.  The basket will be finished with a built-in handle that I learned from Rae many years ago.<br><br>Need something at the front door for mitts, scarves, etc. This basket has been designed for that use. The basket is a base the uses the packing weave to build up the pouch.  Weaves will include twining, 3 rod wale and packing weaves.  The rim will be a trac rim.  The basket will be finished with a rope handle",
     "title": "Two H's: Harvest & Hanging Willow Baskets",
@@ -154,8 +136,6 @@
   },
   "willowBackPack": {
     "image": "mia-backpack.jpg",
-    "width": 2000,
-    "height": 1000,
     "layout": "wide",
     "description": "Create a ditch Willow backpack. I haven't decided yet whether we'll do an oval base or a Catalan base. Will do three broad whale at the bottom and zigzag weave for our Rand followed by a three rod wale at the top. <br><br>Note: students will be responsible for getting straps on their backpacks. I will offer some design ideas.",
     "title": "Willow Back Pack",
@@ -171,8 +151,6 @@
   },
   "berryBowl": {
     "image": "freyja-berry-basket.jpg",
-    "width": 2000,
-    "height": 1000,
     "layout": "wide",
     "description": "A small round willow basket perfect for beginners. Learn the basics of stake and strand basketry: a slath base, waling, pairing, slewing and a rod border with an optional wrapped-core handle.",
     "title": "Beginner Berry Basket",
@@ -188,8 +166,6 @@
   },
   "rusticWillowChair": {
     "image": "laura-chair.jpg",
-    "width": 1500,
-    "height": 2000,
     "layout": "",
     "description": "Create your own unique rustic chair using locally sourced native willow. You will learn how to harvest willow legally and respectfully. You will also learn construction techniques and willow furniture proportions.",
     "title": "Rustic Willow Chair",
@@ -205,8 +181,6 @@
   },
   "mushroomBasket": {
     "image": "candice-mushroom.jpg",
-    "width": 2000,
-    "height": 1000,
     "layout": "wide",
     "description": "Using a solid base (some polypore mushrooms will be available as bases) weave a willow basket incorporating wild materials such as dried mushrooms, pine cones driftwood etc! Tools and all wild materials/treasure are provided but your welcome to bring both if you've got something you prefer or treasure to incorporate.",
     "title": "Solid Base Mushroom Infused Basket",
@@ -222,8 +196,6 @@
   },
   "driedFloralWreath": {
     "image": "jo-wreath.jpg",
-    "width": 1499,
-    "height": 2000,
     "layout": "",
     "description": "Great for beginners. Make various sizes of wreath base with native willow species, then adorn them with an array of locally-grown dried flowers and cattail cordage.",
     "title": "Dried Floral Wreath",
@@ -239,8 +211,6 @@
   },
   "melonBasket": {
     "image": "candice-melon.jpg",
-    "width": 1440,
-    "height": 1800,
     "layout": "",
     "description": "Melon Basket",
     "title": "Melon Basket",
@@ -256,8 +226,6 @@
   },
   "miniBasket": {
     "image": "kelsey-marie-mini.jpg",
-    "width": 437,
-    "height": 348,
     "layout": "",
     "description": "Join us for a heartwarming and hands-on experience in the art of basket weaving. This cozy workshop invites you to slow down, connect with natural materials, and create something meaningful with your own two hands. <br><br>Under gentle guidance, you'll learn the basics of weaving while exploring the meditative rhythm of working with nature's fibres. This workshop is a wonderful way to nurture creativity with nature, mindfulness, and community connections. <br><br>Leave with a charming mini basket that's perfect for holding treasures, herbs, or small keepsakes—and a renewed sense of connection to the natural world.",
     "title": "Mini Basket",
@@ -273,8 +241,6 @@
   },
   "randomWeaveWillowBasket": {
     "image": "karla-random.jpg",
-    "width": 2000,
-    "height": 1500,
     "layout": "wide",
     "description": "Try the random weave technique. Instructor Karla Powell loves how this weave allows for a lot of creativity in basket design. Students will be able to decide on their own form, and create a functional or sculptural (or both) basket that will be uniquely their own.",
     "title": "Random Weave Willow Basket",
@@ -290,8 +256,6 @@
   },
   "smallRushPouch": {
     "image": "freyja-bull-rush-pouch.jpg",
-    "width": 2000,
-    "height": 1000,
     "layout": "wide",
     "description": "Make a small pouch from locally-harvested bulrush. Learn the basics of weaving with soft materials on a wood form.<br><br>The pouch will feature 3 different styles of pairing, with a twisted rope border. We will also discuss how to harvest and prepare rush for weaving. We probably won't have time to finish our pouches during the class, but you'll come away with everything you need to finish it up on your own.",
     "title": "Bulrush Pouch",
@@ -307,8 +271,6 @@
   },
   "pineNeedleBasket": {
     "image": "tania-pine.jpg",
-    "width": 1730,
-    "height": 2000,
     "layout": "",
     "description": "This workshop is intended for beginners. Learn how to harvest, clean and prepare pine needles for basketry. You will create a small basket with a semi precious cabochon centre of your choice and learn two different stitches.",
     "title": "Pine Needle Basket",
@@ -324,8 +286,6 @@
   },
   "figure8Basket": {
     "image": "sarah-wine.jpg",
-    "width": 1500,
-    "height": 2000,
     "layout": "",
     "description": "Use a wood cookie base to weave a double basket (perfect for holding a couple wine bottles or spoons/flippers) Learn how to secure through a wood cookie and start with a three rod wale, then us randing to build up the basket, finish off with another 3 rod wale and a simple border. We will also add a handle if wanted. Class is ok for beginners.",
     "title": "Figure 8 Basket",
@@ -341,8 +301,6 @@
   },
   "pineNeedleSunCatcher": {
     "image": "tania-sun-catcher.jpg",
-    "width": 1688,
-    "height": 1960,
     "layout": "",
     "description": "This class is intended for those that have completed the Beginner Pine Needle Basket workshop. Learn the Wrapped, Diamond and Candle in the Window stitches with a wire wrapped agate slice (sizes and colours vary) of your choice.",
     "title": "Pine Needle Sun Catcher",
@@ -358,8 +316,6 @@
   },
   "artBasket": {
     "image": "sarah-art.jpg",
-    "width": 1500,
-    "height": 2000,
     "layout": "",
     "description": "We will start with a round willow base, add uprights and secure with a three rod wale. We will continue with randing willow. This should be a basket full of \"you\". Bring items to weave in such as different fibers, bells, shells, buttons, beads, yarn, leather or jewelry to incorporate into your basket.",
     "title": "Art Basket",
