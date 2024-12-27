@@ -12,10 +12,11 @@
     "totalCost": 130,
     "instructionCost": 90,
     "limit": 6,
-    "tools": "Awl, shears, rapping iron, locking knife. (Instructor will have extras on hand if needed)",
+    "tools": "awl, shears, rapping iron, locking knife. (Instructor will have extra tools on hand if needed)",
     "teacher": "Freyja Ulveland",
     "scheduleSlots": [0, 1],
-    "scheduleDesc": "Fri All Day"
+    "scheduleDesc": "Fri All Day",
+    "difficulty": 0
   },
   "coveredWaterBottle": {
     "image": "cathie-covered-bottle.jpg",
@@ -28,10 +29,11 @@
     "totalCost": 150,
     "instructionCost": 80,
     "limit": 10,
-    "tools": "sharp scissors, large eye needle",
+    "tools": "sharp scissors, large eye needle.",
     "teacher": "Cathie Harper",
     "scheduleSlots": [0, 1],
-    "scheduleDesc": "Fri All Day"
+    "scheduleDesc": "Fri All Day",
+    "difficulty": 0
   },
   "wildHarvestingStewardship": {
     "image": "betty-stewardship.jpg",
@@ -44,13 +46,14 @@
     "totalCost": 50,
     "instructionCost": 40,
     "limit": 10,
-    "tools": "Secateurs/nippers/shears, eye protection, waterproof warm gloves, sturdy soled warm boots, durable winter wear!",
+    "tools": "secateurs/nippers/shears, eye protection, waterproof warm gloves, sturdy soled warm boots, durable winter wear!",
     "teacher": "Betty Attwood",
     "scheduleSlots": [0],
-    "scheduleDesc": "Fri AM"
+    "scheduleDesc": "Fri AM",
+    "difficulty": 0
   },
-  "broomWorkshop-Cobwebber": {
-    "image": "kayla-broom.jpg",
+  "threeHandbrooms": {
+    "image": "kayla-handbroom.jpg",
     "width": 532,
     "height": 640,
     "layout": "",
@@ -63,15 +66,16 @@ Create a mini hand broom, woven whisk and stitched hand broom from start to fini
 Learn tips and techniques for choosing the correct binding, attaching the hurl, and caring for your brooms.
 <br><br> 
 Material (Hurl, Tampico, Reed and Cord) colour combinations are subject to availability and may change over time.",
-    "title": " Broom Workshop - Cobwebber",
+    "title": "3 Handbrooms",
     "materialCost": 120,
     "totalCost": 150,
     "instructionCost": 30,
     "limit": 8,
-    "tools": "All tools and materials will be provided.",
+    "tools": "all tools and materials will be provided.",
     "teacher": "Kayla Yearwood",
-    "scheduleSlots": [1],
-    "scheduleDesc": "Fri PM"
+    "scheduleSlots": [0],
+    "scheduleDesc": "Fri AM",
+    "difficulty": 0
   },
   "catalanTray": {
     "image": "karla-catalan-tray.jpg",
@@ -87,7 +91,8 @@ Material (Hurl, Tampico, Reed and Cord) colour combinations are subject to avail
     "tools": "Sharp pruners, sharp locking blade",
     "teacher": "Karla Powell",
     "scheduleSlots": [0],
-    "scheduleDesc": "Fri AM"
+    "scheduleDesc": "Fri AM",
+    "difficulty": 0
   },
   "willowSwedishStars": {
     "image": "karla-swedish-star.jpg",
@@ -103,7 +108,8 @@ Material (Hurl, Tampico, Reed and Cord) colour combinations are subject to avail
     "tools": "Sharp hand held pruners, sharp locking blade, measuring tape.",
     "teacher": "Karla Powell",
     "scheduleSlots": [1],
-    "scheduleDesc": "Fri PM"
+    "scheduleDesc": "Fri PM",
+    "difficulty": 0
   },
   "cuteWallThing": {
     "image": "mia-wall-thing.jpg",
@@ -129,15 +135,16 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Sharp knife, clippers",
     "teacher": "Mia Coco",
     "scheduleSlots": [1],
-    "scheduleDesc": "Fri PM"
+    "scheduleDesc": "Fri PM",
+    "difficulty": 0
   },
-  "broomWorkshop-Cobwebber": {
+  "cobwebberBroom": {
     "image": "kayla-broom.jpg",
     "width": 532,
     "height": 640,
     "layout": "",
     "description": "Learn to make a cobwebber style broom made from broomcorn using traditional broom making techniques.",
-    "title": " Broom Workshop - Cobwebber",
+    "title": "Cobwebber Broom",
     "materialCost": 120,
     "totalCost": 150,
     "instructionCost": 30,
@@ -145,7 +152,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "All tools and materials will be provided.",
     "teacher": "Kayla Yearwood",
     "scheduleSlots": [1],
-    "scheduleDesc": "Fri PM"
+    "scheduleDesc": "Fri PM",
+    "difficulty": 0
   },
   "willowGardenTrugAndWallBasket": {
     "image": "cathie-2hs.jpg",
@@ -161,7 +169,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Sharp garden shears, locking knife, awl, 5 lb weight (rock is acceptable), wrapping iron if possible",
     "teacher": "Cathie Harper",
     "scheduleSlots": [2, 3, 4, 5],
-    "scheduleDesc": "Sat & Sun All Day"
+    "scheduleDesc": "Sat & Sun All Day",
+    "difficulty": 0
   },
   "willowBackPack": {
     "image": "mia-backpack.jpg",
@@ -177,23 +186,25 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Sharp knife clippers",
     "teacher": "Mia Coco",
     "scheduleSlots": [2, 3, 4],
-    "scheduleDesc": "Sat All Day, Sun AM"
+    "scheduleDesc": "Sat All Day, Sun AM",
+    "difficulty": 0
   },
   "berryBowl": {
-    "image": "freyja-berry-bowl.jpg",
+    "image": "freyja-berry-basket.jpg",
     "width": 2000,
     "height": 1000,
     "layout": "wide",
-    "description": "A small round willow basket perfect for beginners. Learn the basics of stake and strand basketry: a 6x6 slath base, waling, pairing, slewing and a rod border. If time permits we will add a wrapped-core handle.",
-    "title": "Berry Bowl",
-    "materialCost": 40,
-    "totalCost": 120,
+    "description": "A small round willow basket perfect for beginners. Learn the basics of stake and strand basketry: a slath base, waling, pairing, slewing and a rod border with an optional wrapped-core handle.",
+    "title": "Begginer Berry Basket",
+    "materialCost": 35,
+    "totalCost": 115,
     "instructionCost": 80,
     "limit": 6,
     "tools": "Awl, shears, rapping iron, locking knife. (Instructor will have extras on hand if needed)",
     "teacher": "Freyja Ulveland",
     "scheduleSlots": [2, 3],
-    "scheduleDesc": "Sat All Day"
+    "scheduleDesc": "Sat All Day",
+    "difficulty": 0
   },
   "rusticWillowChair": {
     "image": "laura-chair.jpg",
@@ -209,7 +220,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "A hammer, pruners, small knife, bush saw and a marker. You will need a cordless drill ( with extra batteries) and an assortment of drill bits -1/16 x3, 3/32x2, 7/64 x2, 1/8 inches, as you will break some. All other materials supplied.",
     "teacher": "Laura Forbes",
     "scheduleSlots": [2, 3],
-    "scheduleDesc": "Sat All Day"
+    "scheduleDesc": "Sat All Day",
+    "difficulty": 0
   },
   "mushroomBasket": {
     "image": "candice-mushroom.jpg",
@@ -225,7 +237,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Teacher will supply",
     "teacher": "Candice Cullum",
     "scheduleSlots": [2],
-    "scheduleDesc": "Sat AM"
+    "scheduleDesc": "Sat AM",
+    "difficulty": 0
   },
   "driedFloralWreath": {
     "image": "jo-wreath.jpg",
@@ -241,7 +254,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Shears",
     "teacher": "Josephine Junas-Grant",
     "scheduleSlots": [2],
-    "scheduleDesc": "Sat AM"
+    "scheduleDesc": "Sat AM",
+    "difficulty": 0
   },
   "melonBasket": {
     "image": "candice-melon.jpg",
@@ -257,7 +271,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Teacher will supply",
     "teacher": "Candice Cullum",
     "scheduleSlots": [3],
-    "scheduleDesc": "Sat PM"
+    "scheduleDesc": "Sat PM",
+    "difficulty": 0
   },
   "miniBasket": {
     "image": "kelsey-marie-mini.jpg",
@@ -273,7 +288,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Small pointed sharp scissors and a spray bottle (to keep the materials and basket moist during the weaving)",
     "teacher": "Kelsey and Marie",
     "scheduleSlots": [3],
-    "scheduleDesc": "Sat PM"
+    "scheduleDesc": "Sat PM",
+    "difficulty": 0
   },
   "randomWeaveWillowBasket": {
     "image": "karla-random.jpg",
@@ -289,7 +305,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Sharp hand held pruners; sharp locking blade",
     "teacher": "Karla Powell",
     "scheduleSlots": [4, 5],
-    "scheduleDesc": "Sun All Day"
+    "scheduleDesc": "Sun All Day",
+    "difficulty": 0
   },
   "smallRushPouch": {
     "image": "freyja-bull-rush-pouch.jpg",
@@ -305,7 +322,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "An old towel, spray bottle.",
     "teacher": "Freyja Ulveland",
     "scheduleSlots": [4, 5],
-    "scheduleDesc": "Sun All Day"
+    "scheduleDesc": "Sun All Day",
+    "difficulty": 0
   },
   "pineNeedleBasket": {
     "image": "tania-pine.jpg",
@@ -321,7 +339,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "None",
     "teacher": "Tania Kristensen",
     "scheduleSlots": [4],
-    "scheduleDesc": "Sun AM"
+    "scheduleDesc": "Sun AM",
+    "difficulty": 0
   },
   "figure8Basket": {
     "image": "sarah-wine.jpg",
@@ -337,7 +356,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Sharp pruning shears, awl, optional: rapping iron",
     "teacher": "Sarah Graham",
     "scheduleSlots": [4],
-    "scheduleDesc": "Sun AM"
+    "scheduleDesc": "Sun AM",
+    "difficulty": 0
   },
   "pineNeedleSunCatcher": {
     "image": "tania-sun-catcher.jpg",
@@ -353,7 +373,8 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "None",
     "teacher": "Tania Kristensen",
     "scheduleSlots": [5],
-    "scheduleDesc": "Sun PM"
+    "scheduleDesc": "Sun PM",
+    "difficulty": 0
   },
   "artBasket": {
     "image": "sarah-art.jpg",
@@ -369,6 +390,7 @@ Mia's goal is to create a warm environment to inspire you to make a second baske
     "tools": "Items to weave in that have meaning to the weaver, sharp pruning shears, sharp knife, scissors, weight (antique iron, heavy round rock), optional: rapping iron",
     "teacher": "Sarah Graham",
     "scheduleSlots": [5],
-    "scheduleDesc": "Sun PM"
+    "scheduleDesc": "Sun PM",
+    "difficulty": 0
   }
 }
