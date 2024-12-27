@@ -15,20 +15,27 @@ const failure: HTMLElement = document.querySelector("#register .failure")!
 form.addEventListener("submit", async (e) => {
   e.preventDefault()
 
-  // form.classList.toggle("hidden", true)
-  // loading.classList.toggle("hidden", false)
-
   const email = input.value
+  if (email.length < 3) return
+
+  form.classList.toggle("hidden", true)
+  loading.classList.toggle("hidden", false)
+
   const res = await window.fetch("https://spiralganglion-weaving.web.val.run/auth", {
     method: "POST",
     body: JSON.stringify({ email })
   })
 
-  // loading.classList.toggle("hidden", true)
-  // success.classList.toggle("hidden", false)
-
   const val = await res.json()
   console.log(val)
+
+  loading.classList.toggle("hidden", true)
+
+  if (val?.ok) {
+    success.classList.toggle("hidden", false)
+  } else {
+    failure.classList.toggle("hidden", false)
+  }
 })
 
 export {}

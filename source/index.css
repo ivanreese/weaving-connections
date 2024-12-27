@@ -407,6 +407,18 @@ iframe {
   place-items: end;
 }
 
+#register .success,
+#register .loading,
+#register .failure {
+  padding: 1em;
+  border-radius: 8px;
+  background: #fff;
+}
+
+#register .hidden {
+  display: none;
+}
+
 footer {
   text-align: center;
   padding: 2em;

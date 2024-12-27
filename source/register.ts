@@ -528,7 +528,7 @@ let remaining: Record<WorkshopId, any> = {}
 function err(msg: string) {
   loading.remove()
   tag("h3", document.body, msg)
-  tag("p", document.body, "Something went wrong when loading your registration. Please return to the <a href='/'>Weaving Connections</a> home page and try registering again, or email <b>fulveland@gmail.com</b> for help.")
+  tag("p", document.body, "Something went wrong when loading your registration. Please return to the <a href='/'>Weaving Connections</a> home page and try registering again, or email <b>albertabasketryguild@gmail.com</b> for help.")
 }
 
 async function loadData() {
