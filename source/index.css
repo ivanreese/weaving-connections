@@ -188,13 +188,12 @@ nav a:hover {
 .card h3 {
   margin: 0;
   font-size: 1.1rem;
-  color: var(--dark-blue);
 }
 
 .card h4 {
   margin: 0 0 0.5rem;
   font-size: 1rem;
-  color: var(--pink);
+  font-weight: 100;
 }
 
 .card .info {
@@ -202,6 +201,20 @@ nav a:hover {
   margin: auto;
   padding: 1rem 0.4rem 0;
   text-align: center;
+}
+.info h3 {
+  font-family: baloo;
+  color: var(--dark-blue);
+}
+
+.info h4 {
+  color: var(--font-black);
+  font-size: 1rem;
+  padding-bottom: 0.2rem;
+}
+
+.card .info h4 {
+  padding-bottom: 0;
 }
 
 .card .meta {
@@ -268,8 +281,9 @@ nav a:hover {
 }
 
 .workshop dialog b {
-  font-size: 0.9em;
-  color: var(--maroon);
+  /* font-size: 0.9em;
+  color: var(--light-green); */
+  padding-top: 0.3rem;
 }
 
 /* ATTENDING ******************************************************************************************/

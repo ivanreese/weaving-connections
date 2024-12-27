@@ -13,6 +13,7 @@
   --light-blue: #c7cbdf;
   --light-green: #797122;
   --maroon: hsl(15, 50%, 25%); /* variant of #632413; */
+  /* --maroon: #632413; */
   --pink: #c37d92;
   --red: #cd563c;
   --orange: #de4c31;
@@ -56,28 +57,27 @@ h1 {
   text-align: center;
   font-size: 3em;
   font-family: baloo;
-  color: var(--maroon);
+  color: var(--light-green);
 }
 
 h2 {
   margin: 0;
   font-size: 2em;
-  font-family: vollkorn;
-  color: var(--maroon);
+  font-family: baloo;
+  color: var(--light-green);
 }
 
 h3 {
   margin: 0;
   font-size: 1.5em;
-  line-height: 1;
-  font-family: baloo;
+  font-family: open-sans, sans-serif;
   color: var(--maroon);
 }
 
 h4 {
   font-size: 1.25em;
   margin: 0;
-  font-family: vollkorn;
+  font-family: open-sans, sans-serif;
 }
 
 p {
