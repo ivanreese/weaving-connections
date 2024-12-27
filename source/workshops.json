@@ -287,7 +287,7 @@
   "figure8Basket": {
     "image": "sarah-wine.jpg",
     "layout": "",
-    "description": "Use a wood cookie base to weave a double basket (perfect for holding a couple wine bottles or spoons/flippers) Learn how to secure through a wood cookie and start with a three rod wale, then us randing to build up the basket, finish off with another 3 rod wale and a simple border. We will also add a handle if wanted. Class is ok for beginners.",
+    "description": "Use a wood cookie base to weave a double basket (perfect for holding a couple wine bottles or spoons/flippers). Learn how to secure uprights through a wood cookie and start with a three rod wale, use randing to build up the basket, then finish off with another 3 rod wale and a simple border. We will also add a handle if wanted. Class is ok for beginners.",
     "title": "Figure 8 Basket",
     "materialCost": 40,
     "totalCost": 80,
@@ -312,7 +312,7 @@
     "teacher": "Tania Kristensen",
     "scheduleSlots": [5],
     "scheduleDesc": "Sun PM",
-    "difficulty": 0
+    "difficulty": 1
   },
   "artBasket": {
     "image": "sarah-art.jpg",

@@ -124,7 +124,7 @@ nav a:hover {
   gap: 0 1em;
 }
 
-.lefty img {
+.lefty > img {
   grid-area: img;
   width: 13em;
   border-radius: 8px;
@@ -151,6 +151,11 @@ nav a:hover {
   .lefty img {
     width: 100%;
   }
+}
+
+.beginner {
+  width: 1.1em;
+  rotate: -5deg;
 }
 
 .grid {
@@ -185,7 +190,7 @@ nav a:hover {
   box-shadow: 0 2px 6px #6422, 0 3px 12px #6422;
 }
 
-.card img {
+.card > img {
   width: 100%;
   aspect-ratio: 0.8;
   height: auto;
@@ -234,12 +239,25 @@ nav a:hover {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
+  align-items: center;
   gap: 1px;
   margin: 0.5rem 0;
 }
 
 .card .meta span {
   padding: 0.15em 0.3em;
+}
+
+.card .beg {
+  align-self: flex-end;
+}
+
+.card .beginner {
+  width: 1.1em;
+}
+
+.difficulty1 .beg {
+  display: none;
 }
 
 /* WORKSHOP DIALOG *******************************************************/
@@ -297,6 +315,11 @@ nav a:hover {
   /* font-size: 0.9em;
   color: var(--light-green); */
   padding-top: 0.3rem;
+}
+
+.workshop dialog .beginner-friendly {
+  color: var(--pink);
+  font-weight: normal;
 }
 
 /* ATTENDING ******************************************************************************************/
@@ -445,12 +468,17 @@ iframe {
   place-items: end;
 }
 
+#register .waiting,
 #register .success,
 #register .loading,
 #register .failure {
   padding: 1em;
   border-radius: 8px;
-  background: #fff;
+  background: #fff8;
+}
+
+#register .waiting {
+  text-align: center;
 }
 
 #register .hidden {

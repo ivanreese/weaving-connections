@@ -1,4 +1,4 @@
-<div class="workshop dialog">
+<div class="workshop dialog difficulty{{difficulty}}">
   <div class="card dialoger">
     <img src="/photos/{{image}}" />
     <div class="info">
@@ -8,6 +8,7 @@
     <div class="meta">
       <span class="time">{{scheduleDesc}}</span>
       <span class="total">${{totalCost}}</span>
+      <span class="beg"><img class="beginner" src="/icon/beginner.svg" /></span>
     </div>
   </div>
 
@@ -18,6 +19,7 @@
     <div class="info">
       <h3>{{title}}</h3>
       <h4>with {{teacher}}</h4>
+      <h4 class="beginner-friendly">Beginner-friendly</h4>
       <p>{{description}}</p>
       <p><b>Tools you should bring:</b> {{tools}}</p>
     </div>
