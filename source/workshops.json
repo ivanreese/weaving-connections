@@ -4,7 +4,9 @@
     "width": 2000,
     "height": 1000,
     "layout": "wide",
-    "description": "Learn to weave a textured bowl using a rope coil weave. We'll start with a 3x3 slath base, then weave a 4-rod drop-down wale to create a slight foot before moving up the sides with the rope coil weave. Once you get the hang of it, this weave moves quickly. The basket will be finished with a rod border. While the rope coil weave is not difficult to learn, some previous weaving experience would be helpful.",
+    "description": "Learn to weave a textured bowl using a rope coil weave. We'll start with a 3x3 slath base, then weave a 4-rod drop-down wale to create a slight foot before moving up the sides with the rope coil weave. Once you get the hang of it, this weave moves quickly. The basket will be finished with a rod border. 
+    <br><br>
+    While the rope coil weave is not difficult to learn, some previous weaving experience would be helpful.",
     "title": "Textured Willow Bowl",
     "materialCost": 40,
     "totalCost": 130,
@@ -47,6 +49,30 @@
     "scheduleSlots": [0],
     "scheduleDesc": "Fri AM"
   },
+  "broomWorkshop-Cobwebber": {
+    "image": "kayla-broom.jpg",
+    "width": 532,
+    "height": 640,
+    "layout": "",
+    "description": "In this workshop, participants will be guided through the process of making three different types of hand brooms that they will then take home with them. Broom-making is a practice steeped in tradition, and each broom you create is functional.
+<br><br>
+During the workshop, you will:
+<br>
+Create a mini hand broom, woven whisk and stitched hand broom from start to finish.
+<br>
+Learn tips and techniques for choosing the correct binding, attaching the hurl, and caring for your brooms.
+<br><br> 
+Material (Hurl, Tampico, Reed and Cord) colour combinations are subject to availability and may change over time.",
+    "title": " Broom Workshop - Cobwebber",
+    "materialCost": 120,
+    "totalCost": 150,
+    "instructionCost": 30,
+    "limit": 8,
+    "tools": "All tools and materials will be provided.",
+    "teacher": "Kayla Yearwood",
+    "scheduleSlots": [1],
+    "scheduleDesc": "Fri PM"
+  },
   "catalanTray": {
     "image": "karla-catalan-tray.jpg",
     "width": 2000,
@@ -84,13 +110,23 @@
     "width": 2000,
     "height": 1000,
     "layout": "wide",
-    "description": "Description coming soon",
-    "title": "Cute Wall Thing",
+    "description": "In this workshop, we’ll create a charming wall-hanging basket using a circular wood base (also called a "wood cookie"). 
+<br><br>
+What You’ll Learn:
+<br><br>
+Base Preparation: Work with a pre-dried wood circle, complete with holes drilled around the edge.
+<br><br>
+Weaving Techniques: Learn the three-rod wale method and back-and-forth pairing to form the basket.
+<br><br>
+Finishing Touch: Complete your basket with a two-behind-one border or a trac border.
+<br><br>
+Mia's goal is to create a warm environment to inspire you to make a second basket!",
+    "title": "Beginner-Friendly Wall Hanging Basket",
     "materialCost": 30,
     "totalCost": 70,
     "instructionCost": 40,
     "limit": 6,
-    "tools": "Sharp knife clippers",
+    "tools": "Sharp knife, clippers",
     "teacher": "Mia Coco",
     "scheduleSlots": [1],
     "scheduleDesc": "Fri PM"
@@ -101,7 +137,7 @@
     "height": 640,
     "layout": "",
     "description": "Learn to make a cobwebber style broom made from broomcorn using traditional broom making techniques.",
-    "title": " Broom workshop - Cobwebber",
+    "title": " Broom Workshop - Cobwebber",
     "materialCost": 120,
     "totalCost": 150,
     "instructionCost": 30,
