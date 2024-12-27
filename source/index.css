@@ -148,7 +148,7 @@ nav a:hover {
     place-items: center;
   }
 
-  .lefty img {
+  .lefty > img {
     width: 100%;
   }
 }
