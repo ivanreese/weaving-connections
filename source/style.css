@@ -127,6 +127,7 @@ select {
   font: inherit;
 }
 
+button,
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -139,6 +140,7 @@ textarea {
   background: #fff5;
 }
 
+button,
 input[type="submit"] {
   width: auto;
   color: var(--dark-blue);
@@ -146,13 +148,19 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+button:hover,
 input[type="submit"]:hover {
   background: white;
 }
 
+button:disabled,
 input[type="submit"]:disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+[required]:invalid {
+  border-color: var(--orange);
 }
 
 label > span {

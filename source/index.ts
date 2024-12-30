@@ -18,8 +18,8 @@ form.addEventListener("submit", async (e) => {
   const email = input.value
   if (email.length < 3) return
 
-  form.classList.toggle("hidden", true)
-  loading.classList.toggle("hidden", false)
+  form.classList.add("hidden")
+  loading.classList.remove("hidden")
 
   const res = await window.fetch("https://spiralganglion-weaving.web.val.run/auth", {
     method: "POST",
@@ -28,8 +28,8 @@ form.addEventListener("submit", async (e) => {
 
   const val = await res.json()
   const message = val?.ok ? success : failure
-  message.classList.toggle("hidden", false)
-  loading.classList.toggle("hidden", true)
+  message.classList.remove("hidden")
+  loading.classList.add("hidden")
 })
 
 export {}
