@@ -489,3 +489,8 @@ footer {
   padding: 2em;
   background: var(--background-dark);
 }
+
+.center {
+  max-width: max-content;
+  margin-inline: auto;
+}

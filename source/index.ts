@@ -27,15 +27,9 @@ form.addEventListener("submit", async (e) => {
   })
 
   const val = await res.json()
-  console.log(val)
-
+  const message = val?.ok ? success : failure
+  message.classList.toggle("hidden", false)
   loading.classList.toggle("hidden", true)
-
-  if (val?.ok) {
-    success.classList.toggle("hidden", false)
-  } else {
-    failure.classList.toggle("hidden", false)
-  }
 })
 
 export {}
