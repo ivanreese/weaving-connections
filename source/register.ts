@@ -310,6 +310,7 @@ function makeTextarea(parent: HTMLElement, name: FieldName, field: TextyField, d
 function makeRadio(parent: HTMLElement, name: FieldName, field: RadioField, data: any) {
   makeEnumeratedInput("radio", parent, name, field, (input, key) => {
     if (data[name] == key) input.checked = true
+    if (completedRegistration) input.disabled = true
     input.addEventListener("change", () => saveFieldValue(name, key))
   })
 }
@@ -317,6 +318,7 @@ function makeRadio(parent: HTMLElement, name: FieldName, field: RadioField, data
 function makeCheckbox(parent: HTMLElement, name: FieldName, field: CheckboxField, data: any) {
   makeEnumeratedInput("checkbox", parent, name, field, (input, key) => {
     if (data[key]) input.checked = true
+    if (completedRegistration) input.disabled = true
     input.addEventListener("change", () => saveFieldValue(key, input.checked))
   })
 }
@@ -350,6 +352,8 @@ function saveFieldValue(name: string, value: any) {
 
 // When a workshop is clicked, update the registration state and then save
 const toggleWorkshop = (myId: WorkshopId, cb: HTMLInputElement, myDetails: WorkshopDetails) => (e: Event) => {
+  if (completedRegistration) return
+
   // Save the new state of this checkbox
   registrationData[myId] = cb.checked
 
@@ -554,6 +558,7 @@ const url = new URL(window.location.href)
 const id = url.searchParams.get("id")
 
 let registrationData: Record<WorkshopId, any> = {}
+let completedRegistration = false
 let remainingSeatsByWorkshop: Record<WorkshopId, number> = {}
 let workshopCards: WorkshopCardData[] = []
 
@@ -567,10 +572,12 @@ async function loadData() {
 
   if (res.err) return err("Invalid Registration")
 
-  // We need two pieces of data to populate the form:
+  // We need several pieces of data to populate the form:
   // 1. Saved data for this user
   registrationData = res.registration
-  // 2. The number of remaining seats for each workshop
+  // 2. Has the user already completed registration (meaning they can't change stuff that costs money)
+  completedRegistration = res.completed
+  // 3. The number of remaining seats for each workshop
   remainingSeatsByWorkshop = res.remaining
 
   workshops = await fetch("workshops.json").then((r) => r.json())
