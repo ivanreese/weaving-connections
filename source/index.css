@@ -321,6 +321,10 @@ nav a:hover {
   font-weight: normal;
 }
 
+.workshop.difficulty1 dialog .beginner-friendly {
+  display: none;
+}
+
 /* ATTENDING ******************************************************************************************/
 
 .halfers {
