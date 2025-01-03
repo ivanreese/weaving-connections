@@ -41,6 +41,7 @@ html {
 
 body {
   margin: 0 auto;
+  padding: 1px 0; /* contain margins */
   font-family: open-sans, sans-serif;
   background: var(--background);
   color: var(--font-black);
@@ -168,4 +169,31 @@ label > span {
   font-weight: bold;
   font-size: 0.9em;
   color: var(--dark-blue);
+}
+
+.center {
+  max-width: max-content;
+  margin-inline: auto;
+}
+
+#success {
+  max-width: 48em;
+  margin-inline: auto;
+  padding: var(--margin);
+}
+
+#refund {
+  margin-top: 4em;
+  max-width: 48em;
+  margin-inline: auto;
+  padding: 4em var(--margin) 2em;
+  border-top: 2px solid var(--background-dark);
+}
+
+#refund h2 {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
 }

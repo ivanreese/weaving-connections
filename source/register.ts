@@ -1,6 +1,7 @@
-export {}
+import { tag, postJson } from "./helpers.js"
 
-const formStructure: FormStructure = {
+// This is the "declarative" description of (most of) the registration form
+const formDescription: FormDescription = {
   Basics: {
     fullName: { type: "text", required: true, label: "Full Name" },
     preferredName: { type: "text", label: "What would you like us to call you?" },
@@ -84,8 +85,7 @@ const formStructure: FormStructure = {
       options: { yes: "Yes", no: "No" }
     },
     volunteer: {
-      label:
-        "We're looking for volunteers to help clean the greenhouse, and help during the event. Care to lend a hand?",
+      label: "We need volunteers to help clean the greenhouse, and help out during the event. Care to lend a hand?",
       class: "wide",
       type: "checkbox",
       options: {
@@ -99,7 +99,7 @@ const formStructure: FormStructure = {
     financialAssistance: {
       type: "checkbox",
       label:
-        "We will refund 50% of one day of classes and materials for selected applicants. Does not include the registration fee ($25), meals, or other expenses.",
+        "We will refund 50% of one day of classes and materials for selected applicants. Does not include the registration fee ($25), meals, or other expenses. We'll apply the refund after you pay, once we have a chance to review all the applications (our funds for this are quite limited).",
       class: "wide",
       options: { financialAssistance: "I would like to apply for financial assistance" }
     },
@@ -111,23 +111,26 @@ const formStructure: FormStructure = {
     }
   },
   Workshops: {},
+  Review: {},
   "Finally…": {
     specialNotes: {
       type: "textarea",
       class: "wide",
       label: "If you have any final comments, special notes, things you'd like us to know, leave them here."
     }
-  }
+  },
+  Submit: {}
 }
 
-type FormStructure = Record<SectionName, SectionFields>
+// And these are all the types for the above declarative description of the form
+
+type FormDescription = Record<SectionName, SectionDescription>
+
 type SectionName = string
+type SectionDescription = Record<FieldName, FieldDescription>
 
-type SectionFields = Record<FieldName, Field>
 type FieldName = string // MUST BE UNIQUE ACROSS ALL SECTIONS — this is the key we use to store the data
-
-type Field = Note | TextyField | CheckboxField | RadioField
-type TextyField = TextField | TelField | EmailField | TextArea
+type FieldDescription = Note | TextishField | CheckboxField | RadioField
 
 type BasicField = { label: string; class?: string; required?: boolean }
 type CheckboxField = BasicField & { type: "checkbox"; options: Record<string, string> } // OPTION KEY MUST BE UNIQUE
@@ -137,10 +140,12 @@ type TextArea = BasicField & { type: "textarea" }
 type TelField = BasicField & { type: "tel" }
 type EmailField = BasicField & { type: "email" }
 type Note = BasicField & { type: "note" }
+type TextishField = TextField | TelField | EmailField | TextArea
 
-type Workshops = Record<WorkshopId, WorkshopDetails>
+// These are the types for the workshops loaded from workshops.json
+type WorkshopDescriptions = Record<WorkshopId, WorkshopDescription>
 type WorkshopId = string
-type WorkshopDetails = {
+type WorkshopDescription = {
   title: string // "Dried Floral Wreath",
   image: string // "1.jpg",
   totalCost: number // 80,
@@ -148,47 +153,35 @@ type WorkshopDetails = {
   scheduleDesc: string // "Fri AM",
 }
 
-let schedule: HTMLElement
-
-type WorkshopCardData = {
-  id: string
-  cb: HTMLInputElement
-  details: WorkshopDetails
+// We turn each of the workshops into a little "token"-like element, which requires some state
+type WorkshopTokenData = {
+  id: WorkshopId
+  checkbox: HTMLInputElement // checkbox that stores whether the workshop has been picked
+  description: WorkshopDescription
 }
 
 // GENERATING THE FORM ////////////////////////////////////////////////////////////////////////////
 // This code runs once during initialization
 
 function makeForm() {
-  for (const sectionName in formStructure) {
-    tag("h2", form, sectionName)
-
+  for (const sectionName in formDescription) {
     if (sectionName == "Workshops") {
       makeWorkshops()
+    } else if (sectionName == "Review") {
       makeReview()
+    } else if (sectionName == "Submit") {
+      makeSubmitButton()
     } else {
-      makeSection(formStructure[sectionName])
+      makeGenericSection(sectionName)
     }
   }
-
-  makeSubmitButton()
-
-  // Run all our idempotent form-updating functions
-  updateWorkshopCards()
-  regenerateSchedule()
-  regenerateSubtotal()
 }
 
-function makeSection(fields: SectionFields) {
-  let section = tag("div", form, { class: "grid" })
-
-  for (const fieldName in fields) {
-    const field = fields[fieldName]
-    makeField(section, fieldName, field as Field, registrationData)
-  }
-}
+// WORKSHOPS SECTION //////////////////////////////////////////////////////////////////////////////
+// This code runs once during initialization
 
 function makeWorkshops() {
+  tag("h2", form, "Workshops")
   tag("div", form, {
     content:
       "<p>Select the workshops you'd like to register for. You may only select one workshop per time slot. Feel free to leave some time empty, or just attend for one day. Note that there's a flat $25 registration fee if you are taking at least one workshop.</p><p>If you want to learn more about each of the workshops, <a href='/#workshops' target='_blank'>click here.</a></p>",
@@ -196,83 +189,135 @@ function makeWorkshops() {
   })
 
   let elm = tag("div", form, { class: "workshop-tokens" })
-  for (let id in workshops) makeWorkshop(elm, id, workshops[id])
+  for (let id in workshopDescriptions) makeWorkshop(elm, id, workshopDescriptions[id])
 }
 
-// SPECIAL ELEMENTS /////////////////////////////////////////////////////////////////////////////////////////
-
-function makeWorkshop(elm: HTMLDivElement, id: WorkshopId, details: WorkshopDetails) {
+function makeWorkshop(elm: HTMLDivElement, id: WorkshopId, description: WorkshopDescription) {
   let rem = remainingSeatsByWorkshop[id]
   let label = tag("label", elm, { class: rem > 0 ? "workshop-token" : "workshop-token sold-out" })
 
-  let cb = tag("input", label)
-  workshopCards.push({ id, cb, details })
-  cb.checked = registrationData[id as keyof typeof registrationData]
-  cb.type = "checkbox"
-  if (rem > 0) cb.addEventListener("change", toggleWorkshop(id, cb, details))
+  let checkbox = tag("input", label)
+  workshopTokens.push({ id, checkbox, description })
+  checkbox.checked = registrationData[id as keyof typeof registrationData]
+  checkbox.type = "checkbox"
+  checkbox.addEventListener("change", toggleWorkshop(id, checkbox, description))
 
-  tag("img", label, { src: "/photos/" + details.image })
+  tag("img", label, { src: "/photos/" + description.image })
 
   let right = tag("div", label, { class: "right" })
-  tag("h5", right, details.title)
+  tag("h5", right, description.title)
   let meta = tag("div", right, { class: "meta" })
-  tag("span", meta, "$" + details.totalCost)
-  tag("span", meta, details.scheduleDesc)
+  tag("span", meta, "$" + description.totalCost)
+  tag("span", meta, description.scheduleDesc)
   tag("span", right, {
     content: rem == 1 ? rem + " spot open" : rem > 0 ? rem + " spots open" : "sold out",
     class: "spots"
   })
 }
 
+// When a workshop is clicked, update the registration state and then save
+const toggleWorkshop = (myId: WorkshopId, cb: HTMLInputElement, myDetails: WorkshopDescription) => (e: Event) => {
+  let rem = remainingSeatsByWorkshop[myId]
+  if (rem <= 0) {
+    cb.checked = false
+  }
+
+  // Save the new state of this checkbox
+  registrationData[myId] = cb.checked
+
+  if (cb.checked) {
+    // Clear any checked checkboxes that conflict with the newly selected one
+    for (const { id, checkbox: cb, description: details } of workshopTokens) {
+      if (id != myId) {
+        for (let slot of myDetails.scheduleSlots) {
+          if (details.scheduleSlots.includes(slot) && cb.checked) {
+            cb.checked = false
+            registrationData[id] = false
+          }
+        }
+      }
+    }
+  }
+
+  saveData()
+}
+
+// REVIEW SECTION /////////////////////////////////////////////////////////////////////////////////
+// This code runs once during initialization
+
 function makeReview() {
   let review = tag("div", form, { class: "review" })
+
   schedule = tag("div", review, { class: "your-schedule" })
+
   let subtotalParent = tag("div", review, { class: "subtotal" })
   tag("h2", subtotalParent, "Subtotal")
+
   subtotalElm = tag("div", subtotalParent, { class: "table" })
 }
 
+// SUBMIT SECTION /////////////////////////////////////////////////////////////////////////////////
+// This code runs once during initialization
+
 function makeSubmitButton() {
-  const submit = tag("button", form, {
+  submitButton = tag("button", form, {
     type: "button",
     class: "submit",
-    content: "Proceed to Payment",
+    content: "Proceed to Payment", // Updated by rerender()
     click: async (e: Event) => {
       e.preventDefault()
 
       if (!form.reportValidity()) return alert("Please fill in all the required fields.")
 
-      submit.disabled = true
+      inert = true
+      rerender()
+
       const res = await postJson("https://spiralganglion-weaving.web.val.run/submit", { id })
-      if (res.err) {
-        console.log(res)
-        // Show a modal error with a "reload" button?
-      } else if (res.paymentLink) {
+
+      if (res.paymentLink) {
         window.location.href = res.paymentLink
-        submit.disabled = false // This makes sure that the form is still submittable if someone hits the back button
+      } else if (res.err == "sold-out") {
+        alert("Sorry — one or more of the workshops you selected are now sold out.")
+        window.location.reload()
+      } else {
+        alert("Sorry — we were unable to prepare the checkout form, and you'll need to try again.")
+        window.location.reload()
       }
     }
   })
 }
 
-// BASIC ELEMENTS /////////////////////////////////////////////////////////////////////////////////////////
-// This code is only run once during initialization
+// GENERIC SECTION ////////////////////////////////////////////////////////////////////////////////
+// This code is only run during initialization
 
-function makeField(parent: HTMLElement, fieldName: FieldName, field: Field, data: any) {
+function makeGenericSection(sectionName: SectionName) {
+  let sectionDescription = formDescription[sectionName]
+
+  tag("h2", form, sectionName)
+  let sectionElm = tag("div", form, { class: "grid" })
+
+  // fieldName will be things like "fullName" or "pronouns"
+  for (const fieldName in sectionDescription) {
+    const fieldDescription = sectionDescription[fieldName]
+    makeField(sectionElm, fieldName, fieldDescription)
+  }
+}
+
+function makeField(parent: HTMLElement, fieldName: FieldName, field: FieldDescription) {
   switch (field.type) {
     case "text":
     case "email":
     case "tel":
-      return makeTexty(parent, fieldName, field, data)
+      return makeTextishInput(parent, fieldName, field)
 
     case "textarea":
-      return makeTextarea(parent, fieldName, field, data)
+      return makeTextarea(parent, fieldName, field)
 
     case "radio":
-      return makeRadio(parent, fieldName, field, data)
+      return makeRadio(parent, fieldName, field)
 
     case "checkbox":
-      return makeCheckbox(parent, fieldName, field, data)
+      return makeCheckbox(parent, fieldName, field)
 
     case "note":
       return tag("p", parent, field.label)
@@ -286,39 +331,37 @@ function makeWrapper(type: "label" | "div", parent: HTMLElement, name: FieldName
   return wrapper
 }
 
-function makeTexty(parent: HTMLElement, name: FieldName, field: TextyField, data: any) {
+function makeTextishInput(parent: HTMLElement, name: FieldName, field: TextishField) {
   const wrapper = makeWrapper("label", parent, name, field)
   const input = tag("input", wrapper, {
     type: field.type,
     name,
-    value: data[name] ?? "",
+    value: registrationData[name] ?? "",
     required: field.required,
     change: () => saveFieldValue(name, input.value)
   })
 }
 
-function makeTextarea(parent: HTMLElement, name: FieldName, field: TextyField, data: any) {
+function makeTextarea(parent: HTMLElement, name: FieldName, field: TextishField) {
   const wrapper = makeWrapper("label", parent, name, field)
   const input = tag("textarea", wrapper, {
     name,
-    content: data[name] ?? "",
+    content: registrationData[name] ?? "",
     required: field.required,
     change: () => saveFieldValue(name, input.value)
   })
 }
 
-function makeRadio(parent: HTMLElement, name: FieldName, field: RadioField, data: any) {
+function makeRadio(parent: HTMLElement, name: FieldName, field: RadioField) {
   makeEnumeratedInput("radio", parent, name, field, (input, key) => {
-    if (data[name] == key) input.checked = true
-    if (completedRegistration) input.disabled = true
+    if (registrationData[name] === key) input.checked = true
     input.addEventListener("change", () => saveFieldValue(name, key))
   })
 }
 
-function makeCheckbox(parent: HTMLElement, name: FieldName, field: CheckboxField, data: any) {
+function makeCheckbox(parent: HTMLElement, name: FieldName, field: CheckboxField) {
   makeEnumeratedInput("checkbox", parent, name, field, (input, key) => {
-    if (data[key]) input.checked = true
-    if (completedRegistration) input.disabled = true
+    if (registrationData[key]) input.checked = true
     input.addEventListener("change", () => saveFieldValue(key, input.checked))
   })
 }
@@ -342,35 +385,8 @@ function makeEnumeratedInput(
   }
 }
 
-// INTERACTION HANDLERS //////////////////////////////////////////////////////////////////////////////////////
-// These functions are run after the user interacts with something in the form
-
 function saveFieldValue(name: string, value: any) {
   registrationData[name] = value
-  saveData()
-}
-
-// When a workshop is clicked, update the registration state and then save
-const toggleWorkshop = (myId: WorkshopId, cb: HTMLInputElement, myDetails: WorkshopDetails) => (e: Event) => {
-  if (completedRegistration) return
-
-  // Save the new state of this checkbox
-  registrationData[myId] = cb.checked
-
-  if (cb.checked) {
-    // Clear any checked checkboxes that conflict with the newly selected one
-    for (const { id, cb, details } of workshopCards) {
-      if (id != myId) {
-        for (let slot of myDetails.scheduleSlots) {
-          if (details.scheduleSlots.includes(slot) && cb.checked) {
-            cb.checked = false
-            registrationData[id] = false
-          }
-        }
-      }
-    }
-  }
-
   saveData()
 }
 
@@ -402,9 +418,11 @@ function regenerateSchedule() {
 }
 
 function addWorkshopToSchedule(i: number, name: string, table: HTMLElement) {
-  let filteredCards = workshopCards.filter(({ cb, details }) => cb.checked && details.scheduleSlots.includes(i))
-  let d: WorkshopCardData | null = filteredCards[0]
-  let value = d?.details?.title ?? "Free time / Open Weave"
+  let filteredTokens = workshopTokens.filter(
+    ({ checkbox: cb, description: details }) => cb.checked && details.scheduleSlots.includes(i)
+  )
+  let d: WorkshopTokenData | null = filteredTokens[0]
+  let value = d?.description?.title ?? "Free time / Open Weave"
   let [labelElm, valueElm] = addRowToSchedule(table, name, value)
   if (d == null) valueElm.className = "nuttin"
 }
@@ -419,21 +437,21 @@ function addRowToSchedule(table: HTMLElement, label: string, value: string) {
 // WORKSHOPS //////////////////////////////////////////////////////////////////////////////////////
 // This code is idempotent
 
-// Make sure all workshop card elements are greyed out if they conflict with a selected workshop
-function updateWorkshopCards() {
+// Make sure all workshop token elements are greyed out if they conflict with a selected workshop
+function updateWorkshopTokens() {
   // Clear all existing classes
-  for (const { cb } of workshopCards) cb.className = ""
+  for (const { checkbox: cb } of workshopTokens) cb.className = ""
 
   // We assume that all the selected workshops are valid — ie: no conflicts
-  let selectedWorkshops = workshopCards.filter(({ cb }) => cb.checked)
+  let selectedWorkshops = workshopTokens.filter(({ checkbox: cb }) => cb.checked)
 
   // Go through all the unselected workshops, and grey them out if they conflict with a selected workshop
-  let unselectedWorkshops = workshopCards.filter(({ cb }) => !cb.checked)
+  let unselectedWorkshops = workshopTokens.filter(({ checkbox: cb }) => !cb.checked)
   unselectedWorkshops.forEach((unchecked) => {
     selectedWorkshops.forEach((checked) => {
-      for (let slot of unchecked.details.scheduleSlots) {
-        if (checked.details.scheduleSlots.includes(slot)) {
-          unchecked.cb.className = "faded"
+      for (let slot of unchecked.description.scheduleSlots) {
+        if (checked.description.scheduleSlots.includes(slot)) {
+          unchecked.checkbox.className = "faded"
         }
       }
     })
@@ -464,7 +482,7 @@ function regenerateSubtotal() {
   // If the field is a workshop, then grab its cost
   let workshopCost = 0
   for (const field in registrationData) {
-    const workshop = workshops[field]
+    const workshop = workshopDescriptions[field]
     if (workshop == null || registrationData[field] == false) continue
     workshopCost += workshop.totalCost
   }
@@ -481,70 +499,37 @@ function regenerateSubtotal() {
   }
 
   // Needs to be a number, but JSON will sometimes coerce it to a string
-  registrationData.payExtra = +registrationData.payExtra
-  if (registrationData.payExtra > 0) {
+  let payExtra = +registrationData.payExtra
+  if (payExtra > 0) {
     tag("td", subtotalElm, "Extra Contribution")
-    tag("td", subtotalElm, "$" + registrationData.payExtra)
-    subtotal += registrationData.payExtra
+    tag("td", subtotalElm, "$" + payExtra)
+    subtotal += payExtra
   }
 
   tag("td", subtotalElm, "Total")
   tag("td", subtotalElm, "$" + subtotal)
+
+  submitButton.innerHTML = subtotal > 0 ? "Proceed to Payment" : "Register for Free"
 }
 
-// SERVER CALLS ///////////////////////////////////////////////////////////////////////////////////
-
-function postJson(url: string, json: any, method = "POST") {
-  return window.fetch(url, { method, body: JSON.stringify(json) }).then((res) => res.json())
-}
+// SAVE & RE-RENDER ///////////////////////////////////////////////////////////////////////////////
 
 function saveData() {
+  if (inert) return
+
   if (id != null) {
     const json = { id, data: registrationData }
     postJson("https://spiralganglion-weaving.web.val.run/save", json).then((x) => console.log(x))
   }
 
+  rerender()
+}
+
+function rerender() {
+  document.body.classList.toggle("inert", inert)
   regenerateSubtotal()
-  updateWorkshopCards()
+  updateWorkshopTokens()
   regenerateSchedule()
-}
-
-// HTML HELPERS ///////////////////////////////////////////////////////////////////////////////////
-
-function tag<K extends keyof HTMLElementTagNameMap>(
-  name: K,
-  parent: HTMLElement,
-  opts: string | Record<string, any> = {}
-): HTMLElementTagNameMap[K] {
-  if (typeof opts == "string") opts = { content: opts }
-
-  const elm = document.createElement(name)
-  parent.appendChild(elm)
-
-  if (opts.content) elm.innerHTML = opts.content
-  if (opts.class) elm.className = opts.class
-
-  if (opts.click) elm.addEventListener("click", opts.click)
-  if (opts.change) elm.addEventListener("change", opts.change)
-
-  const inputElm = elm as HTMLInputElement
-  if (opts.type) inputElm.type = opts.type
-  if (opts.name) inputElm.name = opts.name
-  if (opts.value) inputElm.value = opts.value
-  if (opts.required) inputElm.required = true
-
-  const imgElm = elm as HTMLImageElement
-  if (opts.src) imgElm.src = opts.src
-
-  return elm
-}
-
-// prettier-ignore
-function err(msg: string) {
-  loading.remove()
-  refundElm.remove()
-  tag("h3", document.body, msg)
-  tag("p", document.body, "Something went wrong when loading your registration. Please return to the <a href='/'>Weaving Connections</a> home page and try registering again, or email <b>albertabasketryguild@gmail.com</b> for help.")
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -557,12 +542,21 @@ let subtotalElm: HTMLElement
 const url = new URL(window.location.href)
 const id = url.searchParams.get("id")
 
-let registrationData: Record<WorkshopId, any> = {}
-let completedRegistration = false
-let remainingSeatsByWorkshop: Record<WorkshopId, number> = {}
-let workshopCards: WorkshopCardData[] = []
+// When the page is "inert", the user can't interact with it and changes won't be saved.
+// It will go inert:
+// * Right when the form is submitted (so that if the user hits Back, they can't change stuff)
+// * When anyone views a completed form
+// * When an admin views the form (even if it's not completed)
+let inert = url.searchParams.get("inert") == "true"
 
-let workshops: Workshops
+let registrationData: Record<WorkshopId, any> = {}
+let remainingSeatsByWorkshop: Record<WorkshopId, number> = {}
+let workshopTokens: WorkshopTokenData[] = []
+
+let workshopDescriptions: WorkshopDescriptions
+
+let schedule: HTMLElement
+let submitButton: HTMLButtonElement
 
 async function loadData() {
   if (id == null) return err("Invalid Registration")
@@ -573,19 +567,35 @@ async function loadData() {
   if (res.err) return err("Invalid Registration")
 
   // We need several pieces of data to populate the form:
-  // 1. Saved data for this user
   registrationData = res.registration
-  // 2. Has the user already completed registration (meaning they can't change stuff that costs money)
-  completedRegistration = res.completed
-  // 3. The number of remaining seats for each workshop
   remainingSeatsByWorkshop = res.remaining
+  workshopDescriptions = await fetch("workshops.json").then((r) => r.json())
 
-  workshops = await fetch("workshops.json").then((r) => r.json())
-
+  // Done loading
   loading.remove()
   refundElm.classList.remove("hidden")
 
+  if (res.completed) {
+    tag("h4", form, "Your registration has been submitted.")
+    tag("h4", form, "If you need to make changes, send us an email.")
+    inert = true
+  }
+
+  // Do all the one-time form generation
   makeForm()
+
+  // Run all our idempotent form-updating functions
+  updateWorkshopTokens()
+  regenerateSchedule()
+  regenerateSubtotal()
+}
+
+// prettier-ignore
+function err(msg: string) {
+  loading.remove()
+  refundElm.remove()
+  tag("h3", document.body, msg)
+  tag("p", document.body, "Something went wrong when loading your registration. Please return to the <a href='/'>Weaving Connections</a> home page and try registering again, or email <b>albertabasketryguild@gmail.com</b> for help.")
 }
 
 loadData()

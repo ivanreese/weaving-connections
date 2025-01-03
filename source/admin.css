@@ -1,0 +1,49 @@
+body {
+  max-width: max-content;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: left;
+  margin-left: var(--margin);
+}
+
+table {
+  margin-bottom: 3em;
+  padding-inline: var(--margin);
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0.2em 0.5em;
+}
+
+tr:nth-child(even) td {
+  background: #00000009;
+}
+
+th {
+  text-align: left;
+}
+
+small {
+  display: block;
+  font-size: 0.75em;
+}
+
+.users .id {
+  font-size: 0.6em;
+}
+
+.users .counts {
+  display: flex;
+  gap: 0.2em;
+
+  span {
+    width: 2em;
+    background: #0001;
+    border-radius: 4px;
+    text-align: center;
+  }
+}
