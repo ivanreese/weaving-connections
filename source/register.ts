@@ -96,13 +96,13 @@ const formDescription: FormDescription = {
     }
   },
   "Financial Assistance": {
-    financialAssistance: {
-      type: "checkbox",
-      label:
-        "We will refund 50% of one day of classes and materials for selected applicants. Does not include the registration fee ($25), meals, or other expenses. We'll apply the refund after you pay, once we have a chance to review all the applications (our funds for this are quite limited).",
-      class: "wide",
-      options: { financialAssistance: "I would like to apply for financial assistance" }
-    },
+    // financialAssistance: {
+    //   type: "checkbox",
+    //   label:
+    //     "We will refund 50% of one day of classes and materials for selected applicants. Does not include the registration fee ($25), meals, or other expenses. We'll apply the refund after you pay, once we have a chance to review all the applications (our funds for this are quite limited).",
+    //   class: "wide",
+    //   options: { financialAssistance: "I would like to apply for financial assistance" }
+    // },
     payExtra: {
       type: "radio",
       class: "wide",

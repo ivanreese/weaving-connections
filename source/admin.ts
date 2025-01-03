@@ -21,6 +21,7 @@ async function loadData() {
 
   renderUsers(res.users)
   renderWorkshops(res.workshops, res.users)
+  renderEmailToId()
 }
 
 function renderUsers(users: Record<string, any>[]) {
@@ -49,7 +50,7 @@ function renderUsers(users: Record<string, any>[]) {
     let reg = tag("td", row, { class: "registration" })
 
     let dia = tag("span", reg, { class: "dialog" })
-    tag("a", dia, { class: "dialoger", content: "View", click: () => dialog.showModal() })
+    tag("a", dia, { class: "dialoger", content: "Data", click: () => dialog.showModal() })
     let dialog = tag("dialog", dia, { click: () => dialog.close() })
     let diaTable = tag("table", dialog)
     for (var k in user.registration) {
@@ -58,7 +59,12 @@ function renderUsers(users: Record<string, any>[]) {
       tag("td", tr, { content: user.registration[k] })
     }
 
-    tag("span", reg, ` <a href="/register.html?id=${id}&inert=true" target="_blank">Open</a>`)
+    tag("span", reg, `<a href="/register.html?id=${id}&inert=true" target="_blank">Form</a>`)
+
+    if (user.paymentId) {
+      const link = `<a href="https://dashboard.stripe.com/test/payment-links/${user.paymentId}" target="_blank">Stripe</a>`
+      tag("span", reg, link)
+    }
   }
 }
 
@@ -85,6 +91,27 @@ function renderWorkshops(workshops: Record<string, any>[], users: Record<string,
       tag("td", row, { content: v, class: k })
     }
   }
+}
+
+function renderEmailToId() {
+  tag("h2", document.body, "Email -> ID")
+  let parent = tag("div", document.body, { class: "email-to-id" })
+  let email = tag("input", parent, { type: "email" })
+  tag("button", parent, {
+    content: "Update",
+    click: async () => {
+      let res = await fetch("https://spiralganglion-weaving.web.val.run/auth", {
+        body: JSON.stringify({ email: email.value, manual: true }),
+        method: "POST"
+      }).then((res) => res.json())
+      output.textContent = res.id
+      formLink.href = "/register.html?id=" + res.id
+      formLink.textContent = "Form"
+    }
+  })
+  let output = tag("div", parent)
+  let formLink = tag("a", parent)
+  formLink.target = "_blank"
 }
 
 loadData()

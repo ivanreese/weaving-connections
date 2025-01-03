@@ -1,6 +1,7 @@
 body {
   max-width: max-content;
   margin: 0 auto;
+  padding: 0 0 2em;
 }
 
 h2 {
@@ -45,5 +46,25 @@ small {
     background: #0001;
     border-radius: 4px;
     text-align: center;
+  }
+}
+
+.users .registration {
+  display: flex;
+  gap: 0.5em;
+}
+
+.users .registration a {
+  text-decoration: underline;
+}
+
+.email-to-id {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding-inline: var(--margin);
+
+  input {
+    max-width: 20em;
   }
 }
