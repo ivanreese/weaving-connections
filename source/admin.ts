@@ -62,7 +62,7 @@ function renderUsers(users: Record<string, any>[]) {
     tag("span", reg, `<a href="/register.html?id=${id}&inert=true" target="_blank">Form</a>`)
 
     if (user.paymentId) {
-      const link = `<a href="https://dashboard.stripe.com/test/payment-links/${user.paymentId}" target="_blank">Stripe</a>`
+      const link = `<a href="https://dashboard.stripe.com/payment-links/${user.paymentId}" target="_blank">Stripe</a>`
       tag("span", reg, link)
     }
   }
